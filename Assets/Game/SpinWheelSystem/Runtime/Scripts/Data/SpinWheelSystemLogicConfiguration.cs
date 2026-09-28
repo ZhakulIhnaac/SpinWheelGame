@@ -2,9 +2,12 @@ using Utils.Singleton;
 
 namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 {
-	public class SpinWheelSystemLogicConfiguration
+	public static class SpinWheelSystemLogicConfiguration
 	{
 		public const int SpinWheelItemsCount = 8;
+		public const int SpinWheelZonesCount = 120;
+		public const int SuperZoneInterval = 30;
+		public const int SafeZoneInterval = 5;
 
 		public static readonly RandomWeighedItemBag<SpinWheelItem> BasicItems = new(new[]
 																			 {

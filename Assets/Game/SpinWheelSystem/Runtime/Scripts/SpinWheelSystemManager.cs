@@ -1,5 +1,6 @@
 using System;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
+using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
 using Utils.Singleton;
 
@@ -10,6 +11,8 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		[SerializeField] private SpinWheelSystemClientConfiguration _spinWheelSystemClientConfiguration;
 
 		private Tuple<SpinWheelItem, int>[] _spinWheelItems = new Tuple<SpinWheelItem, int>[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
+		public float ZoneStepWidth => _spinWheelSystemClientConfiguration.ZoneStepWidth;
+		public float ZoneStepTime => SpinWheelSystemClientConfiguration.ZoneStepTime;
 
 		public Tuple<SpinWheelItem, int>[] GetItemsForSpinWheel(SpinZoneId spinZoneId)
 		{
@@ -42,6 +45,20 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			}
 
 			return _spinWheelItems;
+		}
+
+		#region Queries
+		public SpinWheelPanelZoneIndicator GetZoneIndicatorPrefab() => _spinWheelSystemClientConfiguration.ZoneIndicatorPrefab;
+		public int GetZoneCount() => SpinWheelSystemLogicConfiguration.SpinWheelZonesCount;
+		public SpinWheelSystemItemSpecification GetItemSpecification(SpinWheelItem spinWheelItem) => _spinWheelSystemClientConfiguration.GetItemSpecification(spinWheelItem);
+		public SpinWheelSystemZoneSpecification GetZoneSpecification(SpinZoneId spinZoneId) => _spinWheelSystemClientConfiguration.GetZoneSpecification(spinZoneId);
+		#endregion
+		public SpinZoneId GetSpinZoneForNumber(int zoneNumber)
+		{
+			if (zoneNumber == 0) return SpinZoneId.Basic;
+			if (zoneNumber % SpinWheelSystemLogicConfiguration.SuperZoneInterval == 0) return SpinZoneId.Super;
+			if (zoneNumber % SpinWheelSystemLogicConfiguration.SafeZoneInterval == 0) return SpinZoneId.Safe;
+			return SpinZoneId.Basic;
 		}
 	}
 }

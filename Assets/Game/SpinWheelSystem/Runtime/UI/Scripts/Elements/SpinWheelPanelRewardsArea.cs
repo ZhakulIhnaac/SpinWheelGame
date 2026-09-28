@@ -6,6 +6,11 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 	{
 		[SerializeField] private RectTransform _rewardsListContent;
 
+		public void Initialize()
+		{
+			throw new System.NotImplementedException();
+		}
+		
 		public void AddReward()
 		{
 			
