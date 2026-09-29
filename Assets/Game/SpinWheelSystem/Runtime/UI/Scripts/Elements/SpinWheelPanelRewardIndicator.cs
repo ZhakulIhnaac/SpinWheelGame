@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Game.SharedGameSystems.HapticSystem.Controllers;
 using Game.SharedGameSystems.SoundSystem.Scripts.Controllers;
 using Game.SharedGameSystems.SoundSystem.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.Scripts;
@@ -65,6 +66,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			_itemAddedEffectTween = _icon.transform.DOScale(Vector2.one * 1.05f, 0.02f).SetLoops(-1, LoopType.Yoyo);
 
 			SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.ItemAddedSoundEffect, SoundEffectPitchMode.GetHigherPitch, $"itemAddedSoundEffect", 0.015f);
+			HapticSystemsManager.Instance.PlayLightHaptic();
 		}
 
 		private void SetDisplayAmount(int value)

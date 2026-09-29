@@ -28,7 +28,6 @@ public class SpinWheelPanel : MonoBehaviour
 		_rewardsArea.Initialize(_wheelElement.EarnedRewardPosition);
 		_exitButton.onClick.AddListener(OnExitButtonClicked);
 		_spinButton.onClick.AddListener(OnSpinButtonClicked);
-		SetNewRewards();
 		ClosePanel();
 	}
 
@@ -37,6 +36,7 @@ public class SpinWheelPanel : MonoBehaviour
 		_rewardsArea.ResetElement();
 		_zonesArea.ResetElement();
 		_wheelElement.ResetElement();
+		_wheelElement.UpdateForCurrentZone();
 		gameObject.SetActive(true);
 	}
 
@@ -91,7 +91,9 @@ public class SpinWheelPanel : MonoBehaviour
 	{
 		if (SpinWheelSystemManager.Instance.TryToAdvanceToTheNextZone())
 		{
+			SpinWheelSystemManager.Instance.SetNewItemsForCurrentZone();
 			_zonesArea.MoveToTheCurrentZone();
+			_wheelElement.PlayUpdateWithZoneChangeAnimation();
 		}
 		else
 		{
@@ -124,11 +126,6 @@ public class SpinWheelPanel : MonoBehaviour
 			_exitButton.interactable = isInteractable;
 			_spinButton.interactable = isInteractable;
 		}
-	}
-
-	private void SetNewRewards()
-	{
-		_wheelElement.UpdateWheelItems(SpinWheelSystemManager.Instance.GetItemsForSpinWheel());
 	}
 	#endregion
 }

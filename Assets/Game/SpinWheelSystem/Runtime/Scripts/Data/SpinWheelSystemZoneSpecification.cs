@@ -9,5 +9,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 		[field: SerializeField] public SpinZoneId Id { get; private set; }
 		[field: SerializeField] public Color ZoneTextColor { get; private set; }
 		[field: SerializeField] public Color ZoneIndicatorBackgroundColor { get; private set; }
+		[field: SerializeField] public Sprite WheelSprite { get; private set; }
+		[field: SerializeField] public Sprite PinSprite { get; private set; }
 	}
 }

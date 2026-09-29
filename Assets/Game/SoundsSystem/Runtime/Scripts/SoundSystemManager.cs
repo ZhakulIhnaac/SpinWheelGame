@@ -14,7 +14,6 @@ namespace Game.SharedGameSystems.SoundSystem.Scripts.Controllers
 		private const int _oneShotAudioSourcePoolCount = 16;
 
 		private readonly Dictionary<string, (float, Coroutine)> _higherPitchValueCountdowns = new();
-		private readonly Dictionary<string, AudioSource> _loopingAudioSources = new();
 
 		private AudioSource[] _oneShotSoundEffectAudioSources;
 		private int _currentAudioSourceIndex = -1;

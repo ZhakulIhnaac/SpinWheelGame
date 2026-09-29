@@ -123,12 +123,19 @@ MonoBehaviour:
   - <Id>k__BackingField: 0
     <ZoneTextColor>k__BackingField: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
     <ZoneIndicatorBackgroundColor>k__BackingField: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+    <WheelSprite>k__BackingField: {fileID: 21300000, guid: f9130836e89b240aaa55852d319df1b2, type: 3}
+    <PinSprite>k__BackingField: {fileID: 21300000, guid: 71ceb1ac0f0e44c0fa4419316de61a05, type: 3}
   - <Id>k__BackingField: 1
     <ZoneTextColor>k__BackingField: {r: 0.5770516, g: 1, b: 0.3820755, a: 1}
     <ZoneIndicatorBackgroundColor>k__BackingField: {r: 0.24706899, g: 0.7830189, b: 0, a: 1}
+    <WheelSprite>k__BackingField: {fileID: 21300000, guid: 04ce583af29e54a9884c47b77efe596c, type: 3}
+    <PinSprite>k__BackingField: {fileID: 21300000, guid: ce4ed3b0bd345484896262090d1f7226, type: 3}
   - <Id>k__BackingField: 2
     <ZoneTextColor>k__BackingField: {r: 1, g: 0.8585831, b: 0.3443396, a: 1}
     <ZoneIndicatorBackgroundColor>k__BackingField: {r: 1, g: 0.70151794, b: 0.011764705, a: 1}
+    <WheelSprite>k__BackingField: {fileID: 21300000, guid: 94963dd63ee1049418900a6c776214f2, type: 3}
+    <PinSprite>k__BackingField: {fileID: 21300000, guid: 1e45c2eb6ca744533ac9aa628b0923fc, type: 3}
   <ZoneIndicatorPrefab>k__BackingField: {fileID: 4722170372279194457, guid: 77ddfbbe22cd94ac7ab0c543b9f428f6, type: 3}
   <RewardIndicatorPrefab>k__BackingField: {fileID: 2925762015710183240, guid: 4cb0b5d3922594a15aeb4b669828e1b3, type: 3}
-  <ItemAddedSoundEffect>k__BackingField: {fileID: 0}
+  <ItemAddedSoundEffect>k__BackingField: {fileID: 8300000, guid: 25411bb66db7c4a4aba12bf13da34ae5, type: 3}
+  <WheelPinTickSound>k__BackingField: {fileID: 8300000, guid: 3ac0e974cf13c4d9ca2623c18e3b7a3c, type: 3}

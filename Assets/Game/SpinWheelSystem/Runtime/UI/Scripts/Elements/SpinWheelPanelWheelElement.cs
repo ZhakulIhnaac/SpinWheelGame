@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
@@ -9,6 +8,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 {
 	public class SpinWheelPanelWheelElement : MonoBehaviour
 	{
+		[field: SerializeField] public RectTransform SelfRectTransform;
 		[field: SerializeField] public Transform EarnedRewardPosition;
 		[SerializeField] private Image _pin;
 		[SerializeField] private Image _wheel;
@@ -17,6 +17,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		private const float _spinWheelItemStepAngle = 360f / SpinWheelSystemLogicConfiguration.SpinWheelItemsCount;
 		
 		private Sequence _spinSequence;
+		private Sequence _zoneChangeSequence;
 
 		public void Initialize()
 		{
@@ -50,18 +51,41 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			_spinSequence.Play();
 		}
 
-		public void UpdateWheelView(Image wheelImage, Image pinImage)
+		public void PlayUpdateWithZoneChangeAnimation()
 		{
-			_pin = pinImage;
-			_wheel = wheelImage;
+			_zoneChangeSequence?.Kill();
+			_zoneChangeSequence = DOTween.Sequence();
+
+			_zoneChangeSequence.Append
+				(
+				 SelfRectTransform.DOAnchorPosY(-Screen.height, 0.3f)
+								  .SetRelative(true)
+								  .SetEase(Ease.InSine)
+				);
+
+			_zoneChangeSequence.AppendCallback(UpdateForCurrentZone);
+
+			_zoneChangeSequence.Append
+				(
+				 SelfRectTransform.DOAnchorPosY(0, 0.3f)
+								  .SetEase(Ease.InSine)
+				);
+
+			_zoneChangeSequence.Play();
 		}
 
-		public void UpdateWheelItems(SpinWheelItemDto[] spinWheelItems)
+		public void UpdateForCurrentZone()
 		{
+			var wheelDisplayItems = SpinWheelSystemManager.Instance.DisplayingSpinWheelItems;
+			
 			for (int i = 0; i < _wheelItemIndicators.Length; i++)
 			{
-				_wheelItemIndicators[i].SetItemIdAndAmount(spinWheelItems[i]);
+				_wheelItemIndicators[i].SetItemIdAndAmount(wheelDisplayItems[i]);
 			}
+
+			var sprites = SpinWheelSystemManager.Instance.GetCurrentZoneWheelSprites();
+			_wheel.sprite = sprites.Item1;
+			_pin.sprite = sprites.Item2;
 		}
 
 		public void ResetElement()
@@ -73,6 +97,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		private void OnDestroy()
 		{
 			_spinSequence?.Kill(true);
+			_zoneChangeSequence?.Kill(true);
 		}
 	}
 }

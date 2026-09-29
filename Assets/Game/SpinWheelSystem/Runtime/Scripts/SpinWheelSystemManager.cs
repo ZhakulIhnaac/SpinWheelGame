@@ -24,16 +24,22 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		private readonly Dictionary<SpinWheelItemId, int> _earnedItems = new(16);
 
 		public SpinWheelItemDto LastItemEarned { get; private set; }
+		public SpinWheelItemDto[] DisplayingSpinWheelItems => _displayingSpinWheelItems;
 		public AudioClip ItemAddedSoundEffect => _spinWheelSystemClientConfiguration.ItemAddedSoundEffect;
 		private int _currentZoneNumber;
 
 		public void Initialize()
 		{
 			_spinWheelPanel.Initialize();
-			ResetSpin();
+			ResetSpinData();
 		}
 
-		public void OpenSpinWheelPanel() => _spinWheelPanel.OpenPanel();
+		public void OpenSpinWheelPanel()
+		{
+			ResetSpinData();
+			SetNewItemsForCurrentZone();
+			_spinWheelPanel.OpenPanel();
+		}
 
 		public bool TryToAdvanceToTheNextZone()
 		{
@@ -46,7 +52,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			return false;
 		}
 		
-		public SpinWheelItemDto[] GetItemsForSpinWheel()
+		public void SetNewItemsForCurrentZone()
 		{
 			var spinZoneId = GetSpinZoneForNumber(_currentZoneNumber);
 
@@ -80,8 +86,6 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			}
 
 			_displayingSpinWheelItems.Shuffle();
-			
-			return _displayingSpinWheelItems;
 		}
 
 		// Ibrahim: Any possible pity, safety or similar systems must be handled here
@@ -105,7 +109,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			}
 			else
 			{
-				ResetSpin();
+				ResetSpinData();
 			}
 		}
 
@@ -119,7 +123,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			_earnedItems.Clear();
 		}
 
-		private void ResetSpin()
+		private void ResetSpinData()
 		{
 			_currentZoneNumber = 1;
 			_earnedItems.Clear();
@@ -149,6 +153,11 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			return SpinZoneId.Basic;
 		}
 		public int GetAmountOfEarnedItem(SpinWheelItemId itemId) => _earnedItems.GetValueOrDefault(itemId, 0);
+		public Tuple<Sprite, Sprite> GetCurrentZoneWheelSprites()
+		{
+			var currentZoneSpecification = _spinWheelSystemClientConfiguration.GetZoneSpecification(CurrentZoneId);
+			return new Tuple<Sprite, Sprite>(currentZoneSpecification.WheelSprite, currentZoneSpecification.PinSprite);
+		}
 		#endregion
 	}
 }

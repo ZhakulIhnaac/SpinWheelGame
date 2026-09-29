@@ -1,3 +1,5 @@
+using Game.SharedGameSystems.HapticSystem.Controllers;
+using Game.SharedGameSystems.SoundSystem.Scripts.Controllers;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using UnityEngine;
 
@@ -10,6 +12,8 @@ namespace Utils.Singleton
 		private void Awake()
 		{
 			_mainMenuPanel.Initialize();
+			HapticSystemsManager.Instance.Initialize();
+			SoundSystemManager.Instance.Initialize();
 			SpinWheelSystemManager.Instance.Initialize();
 		}
 	}

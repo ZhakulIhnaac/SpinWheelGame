@@ -49,6 +49,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		{
 			var newIndicator = Instantiate(SpinWheelSystemManager.Instance.GetRewardIndicatorPrefab(), _rewardsListContent);
 			newIndicator.Initialize(itemEarnedSpinWheelItemId);
+			_rewardIndicators.Add(itemEarnedSpinWheelItemId, newIndicator);
 			return newIndicator;
 		}
 
