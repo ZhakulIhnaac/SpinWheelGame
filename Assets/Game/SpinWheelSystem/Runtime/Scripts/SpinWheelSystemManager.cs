@@ -4,6 +4,7 @@ using AssetKits.ParticleImage;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
+using Utilities;
 using Utils.Singleton;
 using Random = UnityEngine.Random;
 
@@ -78,6 +79,8 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 				_displayingSpinWheelItems[i] = new SpinWheelItemDto(itemsList.TakeRandomItem(), itemCountList.TakeRandomItem());
 			}
 
+			_displayingSpinWheelItems.Shuffle();
+			
 			return _displayingSpinWheelItems;
 		}
 
