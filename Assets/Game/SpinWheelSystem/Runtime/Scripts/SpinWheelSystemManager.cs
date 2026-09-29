@@ -13,7 +13,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 	{
 		[SerializeField] private SpinWheelSystemClientConfiguration _spinWheelSystemClientConfiguration;
 		[SerializeField] private SpinWheelPanel _spinWheelPanel;
-	
+
 		public float ZoneStepWidth => _spinWheelSystemClientConfiguration.ZoneStepWidth;
 		public static float ZoneStepTime => SpinWheelSystemClientConfiguration.ZoneStepTime;
 		public static float WheelSpinTime => SpinWheelSystemClientConfiguration.WheelSpinTime;
@@ -21,24 +21,37 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 
 		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
 		private readonly Dictionary<SpinWheelItemId, int> _earnedItems = new(16);
-		
+
 		public SpinWheelItemDto LastItemEarned { get; private set; }
 		public AudioClip ItemAddedSoundEffect => _spinWheelSystemClientConfiguration.ItemAddedSoundEffect;
 		private int _currentZoneNumber;
-		
+
 		public void Initialize()
 		{
 			_spinWheelPanel.Initialize();
 			ResetSpin();
 		}
 
+		public void OpenSpinWheelPanel() => _spinWheelPanel.OpenPanel();
+
+		public bool TryToAdvanceToTheNextZone()
+		{
+			if (_currentZoneNumber < ZoneCount)
+			{
+				_currentZoneNumber++;
+				return true;
+			}
+			
+			return false;
+		}
+		
 		public SpinWheelItemDto[] GetItemsForSpinWheel()
 		{
 			var spinZoneId = GetSpinZoneForNumber(_currentZoneNumber);
-			
+
 			var arrayIterationIndex = 0;
 			Array.Clear(_displayingSpinWheelItems, 0, _displayingSpinWheelItems.Length);
-			
+
 			if (spinZoneId == SpinZoneId.Basic)
 			{
 				_displayingSpinWheelItems[arrayIterationIndex++] = new SpinWheelItemDto(SpinWheelItemId.Bomb, 1);
@@ -77,23 +90,30 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			{
 				AddToEarnedItems(_displayingSpinWheelItems[index]);
 			}
-			
+
 			return index + 1;
 		}
 
-		public void AddEarnedItemsIntoInventory()
+		public void DoOnSpinWheelPanelClosing(bool isClosingWithRewardsEarned)
+		{
+			if (isClosingWithRewardsEarned)
+			{
+				AddEarnedItemsIntoInventory();
+			}
+			else
+			{
+				ResetSpin();
+			}
+		}
+
+		private void AddEarnedItemsIntoInventory()
 		{
 			foreach (var iteratingEarnedItem in _earnedItems)
 			{
-				Debug.Log($"{iteratingEarnedItem.Value} {_spinWheelSystemClientConfiguration.GetItemSpecification(iteratingEarnedItem.Key).DisplayName}(s) added into the inventory!");	
+				Debug.Log($"{iteratingEarnedItem.Value} {_spinWheelSystemClientConfiguration.GetItemSpecification(iteratingEarnedItem.Key).DisplayName}(s) added into the inventory!");
 			}
 
 			_earnedItems.Clear();
-		}
-
-		public void OpenSpinWheelPanel()
-		{
-			_spinWheelPanel.OpenPanel();
 		}
 
 		private void ResetSpin()
@@ -110,11 +130,12 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			LastItemEarned = itemDto;
 		}
 		#endregion
-		
+
 		#region Queries
 		public SpinWheelPanelZoneIndicator GetZoneIndicatorPrefab() => _spinWheelSystemClientConfiguration.ZoneIndicatorPrefab;
 		public SpinWheelPanelRewardIndicator GetRewardIndicatorPrefab() => _spinWheelSystemClientConfiguration.RewardIndicatorPrefab;
-		public int GetZoneCount() => SpinWheelSystemLogicConfiguration.SpinWheelZonesCount;
+		public int ZoneCount => SpinWheelSystemLogicConfiguration.SpinWheelZonesCount;
+		public SpinZoneId CurrentZoneId => GetSpinZoneForNumber(_currentZoneNumber);
 		public SpinWheelSystemItemSpecification GetItemSpecification(SpinWheelItemId spinWheelItemId) => _spinWheelSystemClientConfiguration.GetItemSpecification(spinWheelItemId);
 		public SpinWheelSystemZoneSpecification GetZoneSpecification(SpinZoneId spinZoneId) => _spinWheelSystemClientConfiguration.GetZoneSpecification(spinZoneId);
 		public SpinZoneId GetSpinZoneForNumber(int zoneNumber)

@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using Game.SpinWheelSystem.Runtime.Scripts;
+using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Singleton;
 
 public class SpinWheelPanel : MonoBehaviour
 {
+	[SerializeField] private SpinWheelPanelBombOverlayElement _bombOverlayElement;
 	[SerializeField] private SpinWheelPanelRewardsArea _rewardsArea;
 	[SerializeField] private SpinWheelPanelZonesArea _zonesArea;
 	[SerializeField] private SpinWheelPanelWheelElement _wheelElement;
@@ -18,6 +20,9 @@ public class SpinWheelPanel : MonoBehaviour
 
 	public void Initialize()
 	{
+		_bombOverlayElement.Closed += OnBombOverlayClosed;
+		
+		_bombOverlayElement.Initialize();
 		_wheelElement.Initialize();
 		_zonesArea.Initialize();
 		_rewardsArea.Initialize(_wheelElement.EarnedRewardPosition);
@@ -46,14 +51,52 @@ public class SpinWheelPanel : MonoBehaviour
 			LockInteractionForTime(SpinWheelSystemManager.WheelSpinTime + SpinWheelSystemManager.RewardGiveAnimationTime);
 			_wheelElement.SpinWheelToTheItem(SpinWheelSystemManager.Instance.GetRewardNumberForSpinningTheWheel());
 			yield return new WaitForSeconds(SpinWheelSystemManager.WheelSpinTime);
-			_rewardsArea.PlayRewardEarnAnimation();
+			HandleSpinResult();
+		}
+
+		void HandleSpinResult()
+		{
+			if (SpinWheelSystemManager.Instance.LastItemEarned.SpinWheelItemId != SpinWheelItemId.Bomb)
+			{
+				_rewardsArea.PlayRewardEarnAnimation();
+			}
+			else
+			{
+				_bombOverlayElement.Open();
+			}
 		}
 	}
-
+	
 	private void OnExitButtonClicked()
 	{
-		SpinWheelSystemManager.Instance.AddEarnedItemsIntoInventory();
+		SpinWheelSystemManager.Instance.DoOnSpinWheelPanelClosing(true);
 		ClosePanel();
+	}
+
+	private void OnBombOverlayClosed(bool didGiveUp)
+	{
+		if (didGiveUp)
+		{
+			SpinWheelSystemManager.Instance.DoOnSpinWheelPanelClosing(false);
+			ClosePanel();
+		}
+		else
+		{
+			TryToAdvanceToTheNextZone();
+		}
+	}
+	
+	private void TryToAdvanceToTheNextZone()
+	{
+		if (SpinWheelSystemManager.Instance.TryToAdvanceToTheNextZone())
+		{
+			_zonesArea.MoveToTheCurrentZone();
+		}
+		else
+		{
+			SpinWheelSystemManager.Instance.DoOnSpinWheelPanelClosing(true);
+			ClosePanel();
+		}
 	}
 
 	private void ClosePanel()

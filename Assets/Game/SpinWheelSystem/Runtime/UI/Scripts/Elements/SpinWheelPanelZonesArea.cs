@@ -20,7 +20,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			ResetElement();
 		}
 
-		public void MoveToTheNextZone(SpinZoneId nextSpinZoneId)
+		public void MoveToTheCurrentZone()
 		{
 			_moveToTheNextZoneSequence?.Kill(true);
 
@@ -28,7 +28,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_moveToTheNextZoneSequence.OnStart(() =>
 											   {
-												   _currentZoneIndicatorBackgroundRight.color = SpinWheelSystemManager.Instance.GetZoneSpecification(nextSpinZoneId).ZoneIndicatorBackgroundColor;
+												   _currentZoneIndicatorBackgroundRight.color = SpinWheelSystemManager.Instance.GetZoneSpecification(SpinWheelSystemManager.Instance.CurrentZoneId).ZoneIndicatorBackgroundColor;
 											   }
 											  );
 
@@ -60,7 +60,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private void PopulateZoneIndicators()
 		{
-			var zonesCount = SpinWheelSystemManager.Instance.GetZoneCount();
+			var zonesCount = SpinWheelSystemManager.Instance.ZoneCount;
 			var zoneIndicatorPrefab = SpinWheelSystemManager.Instance.GetZoneIndicatorPrefab();
 
 			for (int i = 0; i < zonesCount; i++)
