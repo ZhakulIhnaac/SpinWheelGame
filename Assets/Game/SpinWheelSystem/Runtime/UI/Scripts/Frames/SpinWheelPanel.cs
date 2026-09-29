@@ -22,6 +22,7 @@ public class SpinWheelPanel : MonoBehaviour
 		_wheelElement.Initialize();
 		_exitButton.onClick.AddListener(OnExitButtonClicked);
 		_spinButton.onClick.AddListener(OnSpinButtonClicked);
+		SetNewRewards();
 		ClosePanel();
 	}
 
@@ -33,9 +34,10 @@ public class SpinWheelPanel : MonoBehaviour
 		gameObject.SetActive(true);
 	}
 
-	private void ClosePanel()
+	private void OnSpinButtonClicked()
 	{
-		gameObject.SetActive(false);
+		_wheelElement.SpinWheelToTheItem(SpinWheelSystemManager.Instance.GetRewardNumberForSpinningTheWheel());
+		LockInteractionForTime(SpinWheelSystemManager.WheelSpinTime + SpinWheelSystemManager.RewardGiveAnimationTime);
 	}
 
 	private void OnExitButtonClicked()
@@ -43,13 +45,12 @@ public class SpinWheelPanel : MonoBehaviour
 		SpinWheelSystemManager.Instance.AddEarnedItemsIntoInventory();
 		ClosePanel();
 	}
-
-	private void OnSpinButtonClicked()
+	
+	private void ClosePanel()
 	{
-		_wheelElement.SpinWheelToTheItem(SpinWheelSystemManager.Instance.GetRewardNumberForSpinningTheWheel());
-		LockInteractionForTime(SpinWheelSystemManager.WheelSpinTime + SpinWheelSystemManager.RewardGiveAnimationTime);
+		gameObject.SetActive(false);
 	}
-
+	
 	#region Utils
 	private void LockInteractionForTime(float time)
 	{
@@ -69,6 +70,11 @@ public class SpinWheelPanel : MonoBehaviour
 			_exitButton.interactable = isInteractable;
 			_spinButton.interactable = isInteractable;	
 		}
+	}
+
+	private void SetNewRewards()
+	{
+		_wheelElement.UpdateWheelItems(SpinWheelSystemManager.Instance.GetItemsForSpinWheel());
 	}
 	#endregion
 }

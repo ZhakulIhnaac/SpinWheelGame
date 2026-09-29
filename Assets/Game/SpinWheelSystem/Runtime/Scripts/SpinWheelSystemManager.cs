@@ -20,14 +20,18 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 
 		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
 		private readonly List<SpinWheelItemDto> _earnedItems = new(16);
-
+		private int _currentZoneNumber;
+		
 		public void Initialize()
 		{
 			_spinWheelPanel.Initialize();
+			ResetSpin();
 		}
-		
-		public SpinWheelItemDto[] GetItemsForSpinWheel(SpinZoneId spinZoneId)
+
+		public SpinWheelItemDto[] GetItemsForSpinWheel()
 		{
+			var spinZoneId = GetSpinZoneForNumber(_currentZoneNumber);
+			
 			var arrayIterationIndex = 0;
 			Array.Clear(_displayingSpinWheelItems, 0, _displayingSpinWheelItems.Length);
 			
@@ -63,14 +67,14 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		// Ibrahim: Any possible pity, safety or similar systems must be handled here
 		public int GetRewardNumberForSpinningTheWheel()
 		{
-			var number = Random.Range(1, SpinWheelSystemLogicConfiguration.SpinWheelZonesCount + 1);
+			var index = Random.Range(0, SpinWheelSystemLogicConfiguration.SpinWheelItemsCount);
 
-			if (_displayingSpinWheelItems[number].SpinWheelItem != SpinWheelItem.Bomb)
+			if (_displayingSpinWheelItems[index].SpinWheelItem != SpinWheelItem.Bomb)
 			{
-				_earnedItems.Add(_displayingSpinWheelItems[number]);
+				_earnedItems.Add(_displayingSpinWheelItems[index]);
 			}
 			
-			return number;
+			return index + 1;
 		}
 
 		public void AddEarnedItemsIntoInventory()
@@ -86,6 +90,12 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		public void OpenSpinWheelPanel()
 		{
 			_spinWheelPanel.OpenPanel();
+		}
+
+		private void ResetSpin()
+		{
+			_currentZoneNumber = 1;
+			_earnedItems.Clear();
 		}
 
 		#region Queries
