@@ -1,26 +1,33 @@
 using System;
+using System.Collections.Generic;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
 using Utils.Singleton;
+using Random = UnityEngine.Random;
 
 namespace Game.SpinWheelSystem.Runtime.Scripts
 {
 	public class SpinWheelSystemManager : SingletonMonoBehaviour<SpinWheelSystemManager>
 	{
 		[SerializeField] private SpinWheelSystemClientConfiguration _spinWheelSystemClientConfiguration;
-
-		private Tuple<SpinWheelItem, int>[] _spinWheelItems = new Tuple<SpinWheelItem, int>[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
+		
 		public float ZoneStepWidth => _spinWheelSystemClientConfiguration.ZoneStepWidth;
-		public float ZoneStepTime => SpinWheelSystemClientConfiguration.ZoneStepTime;
+		public static float ZoneStepTime => SpinWheelSystemClientConfiguration.ZoneStepTime;
+		public static float WheelSpinTime => SpinWheelSystemClientConfiguration.WheelSpinTime;
+		public static float RewardGiveAnimationTime => SpinWheelSystemClientConfiguration.RewardGiveAnimationTime;
 
-		public Tuple<SpinWheelItem, int>[] GetItemsForSpinWheel(SpinZoneId spinZoneId)
+		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
+		private readonly List<SpinWheelItemDto> _earnedItems = new(16);
+		
+		public SpinWheelItemDto[] GetItemsForSpinWheel(SpinZoneId spinZoneId)
 		{
 			var arrayIterationIndex = 0;
-
+			Array.Clear(_displayingSpinWheelItems, 0, _displayingSpinWheelItems.Length);
+			
 			if (spinZoneId == SpinZoneId.Basic)
 			{
-				_spinWheelItems[arrayIterationIndex++] = new Tuple<SpinWheelItem, int>(SpinWheelItem.Bomb, 1);
+				_displayingSpinWheelItems[arrayIterationIndex++] = new SpinWheelItemDto(SpinWheelItem.Bomb, 1);
 			}
 
 			var itemsList = spinZoneId switch
@@ -30,7 +37,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 								SpinZoneId.Super => SpinWheelSystemLogicConfiguration.SuperItems,
 								_                => SpinWheelSystemLogicConfiguration.BasicItems
 							};
-			
+
 			var itemCountList = spinZoneId switch
 								{
 									SpinZoneId.Basic => SpinWheelSystemLogicConfiguration.BasicItemCounts,
@@ -41,10 +48,33 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 
 			for (int i = arrayIterationIndex; i < SpinWheelSystemLogicConfiguration.SpinWheelItemsCount; i++)
 			{
-				_spinWheelItems[i] = new Tuple<SpinWheelItem, int>(itemsList.TakeRandomItem(), itemCountList.TakeRandomItem());
+				_displayingSpinWheelItems[i] = new SpinWheelItemDto(itemsList.TakeRandomItem(), itemCountList.TakeRandomItem());
 			}
 
-			return _spinWheelItems;
+			return _displayingSpinWheelItems;
+		}
+
+		// Ibrahim: Any possible pity, safety or similar systems must be handled here
+		public int GetRewardNumberForSpinningTheWheel()
+		{
+			var number = Random.Range(1, SpinWheelSystemLogicConfiguration.SpinWheelZonesCount + 1);
+
+			if (_displayingSpinWheelItems[number].SpinWheelItem != SpinWheelItem.Bomb)
+			{
+				_earnedItems.Add(_displayingSpinWheelItems[number]);
+			}
+			
+			return number;
+		}
+
+		public void AddEarnedItemsIntoInventory()
+		{
+			foreach (var iteratingEarnedItem in _earnedItems)
+			{
+				Debug.Log($"{iteratingEarnedItem.Amount} {_spinWheelSystemClientConfiguration.GetItemSpecification(iteratingEarnedItem.SpinWheelItem).DisplayName}(s) added into the inventory!");	
+			}
+
+			_earnedItems.Clear();
 		}
 
 		#region Queries
@@ -52,7 +82,6 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		public int GetZoneCount() => SpinWheelSystemLogicConfiguration.SpinWheelZonesCount;
 		public SpinWheelSystemItemSpecification GetItemSpecification(SpinWheelItem spinWheelItem) => _spinWheelSystemClientConfiguration.GetItemSpecification(spinWheelItem);
 		public SpinWheelSystemZoneSpecification GetZoneSpecification(SpinZoneId spinZoneId) => _spinWheelSystemClientConfiguration.GetZoneSpecification(spinZoneId);
-		#endregion
 		public SpinZoneId GetSpinZoneForNumber(int zoneNumber)
 		{
 			if (zoneNumber == 0) return SpinZoneId.Basic;
@@ -60,5 +89,6 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			if (zoneNumber % SpinWheelSystemLogicConfiguration.SafeZoneInterval == 0) return SpinZoneId.Safe;
 			return SpinZoneId.Basic;
 		}
+		#endregion
 	}
 }

@@ -13,19 +13,17 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private Image _pin;
 		[SerializeField] private Image _wheel;
 		[SerializeField] private SpinWheelItemIndicator[] _wheelItemIndicators;
-		[SerializeField] private Button _spinButton;
 
+		private const float _spinWheelItemStepAngle = 360f / SpinWheelSystemLogicConfiguration.SpinWheelItemsCount;
+		
 		private Sequence _spinSequence;
 
 		public void Initialize()
 		{
-			_spinButton.onClick.AddListener(OnSpinButtonClicked);
 			ResetElement();
 		}
 
-		private void OnSpinButtonClicked() => SpinWheel();
-
-		private void SpinWheel()
+		public void SpinWheelToTheItem(int itemNumber)
 		{
 			_onWheelAnimationToggled.Invoke(true);
 
@@ -54,7 +52,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			}
 		}
 
-		private void ResetElement()
+		public void ResetElement()
 		{
 			_pin.rectTransform.localRotation = Quaternion.identity;
 			_wheel.rectTransform.localRotation = Quaternion.identity;

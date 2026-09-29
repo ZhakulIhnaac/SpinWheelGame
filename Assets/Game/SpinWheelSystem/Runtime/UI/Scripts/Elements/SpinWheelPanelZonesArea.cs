@@ -33,17 +33,17 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 											  );
 
 			_moveToTheNextZoneSequence.Append(
-											  _zonesListContent.DOAnchorPosX(SpinWheelSystemManager.Instance.ZoneStepWidth, SpinWheelSystemManager.Instance.ZoneStepTime)
+											  _zonesListContent.DOAnchorPosX(SpinWheelSystemManager.Instance.ZoneStepWidth, SpinWheelSystemManager.ZoneStepTime)
 															   .SetEase(Ease.InOutSine)
 											 );
 
 			_moveToTheNextZoneSequence.Join(
-											_currentZoneIndicatorBackgroundLeft.rectTransform.DOScale(new Vector3(0f, 1f, 1f), SpinWheelSystemManager.Instance.ZoneStepTime / 2f)
+											_currentZoneIndicatorBackgroundLeft.rectTransform.DOScale(new Vector3(0f, 1f, 1f), SpinWheelSystemManager.ZoneStepTime / 2f)
 																			   .SetEase(Ease.InOutSine)
 										   );
 
 			_moveToTheNextZoneSequence.Join(
-											_currentZoneIndicatorBackgroundRight.rectTransform.DOScale(new Vector3(1f, 1f, 1f), SpinWheelSystemManager.Instance.ZoneStepTime / 2f)
+											_currentZoneIndicatorBackgroundRight.rectTransform.DOScale(new Vector3(1f, 1f, 1f), SpinWheelSystemManager.ZoneStepTime / 2f)
 																				.SetEase(Ease.InOutSine)
 										   );
 
@@ -71,7 +71,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			}
 		}
 
-		private void ResetElement()
+		public void ResetElement()
 		{
 			_zonesListContent.anchoredPosition = Vector2.zero;
 			_currentZoneIndicatorBackgroundLeft.color = Color.white;

@@ -12,6 +12,8 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 		[field: SerializeField] public SpinWheelPanelZoneIndicator ZoneIndicatorPrefab { get; private set; }
 
 		public const float ZoneStepTime = 1f;
+		public const float WheelSpinTime = 3f;
+		public const float RewardGiveAnimationTime = 1.5f;
 		public float ZoneStepWidth => _zoneStepWidth < 0 ? _zoneStepWidth = ZoneIndicatorPrefab.Width : _zoneStepWidth;
 		private float _zoneStepWidth = -1f;
 		

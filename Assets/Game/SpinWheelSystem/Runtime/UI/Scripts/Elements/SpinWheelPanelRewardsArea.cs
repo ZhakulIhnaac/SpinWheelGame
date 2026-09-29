@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
@@ -6,14 +7,24 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 	{
 		[SerializeField] private RectTransform _rewardsListContent;
 
+		private List<SpinWheelPanelRewardIndicator> _rewardIndicators = new(16);
+		
 		public void Initialize()
 		{
-			throw new System.NotImplementedException();
 		}
 		
 		public void AddReward()
 		{
+		}
+
+		public void ResetElement()
+		{
+			for (int i = 0; i < _rewardIndicators.Count; i++)
+			{
+				Destroy(_rewardIndicators[i].gameObject);
+			}
 			
+			_rewardIndicators.Clear();
 		}
 	}
 }
