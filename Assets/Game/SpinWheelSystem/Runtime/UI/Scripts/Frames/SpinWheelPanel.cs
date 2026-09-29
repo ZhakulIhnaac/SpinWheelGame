@@ -59,6 +59,7 @@ public class SpinWheelPanel : MonoBehaviour
 			if (SpinWheelSystemManager.Instance.LastItemEarned.SpinWheelItemId != SpinWheelItemId.Bomb)
 			{
 				_rewardsArea.PlayRewardEarnAnimation();
+				TryToAdvanceToTheNextZone();
 			}
 			else
 			{

@@ -33,17 +33,18 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 											  );
 
 			_moveToTheNextZoneSequence.Append(
-											  _zonesListContent.DOAnchorPosX(SpinWheelSystemManager.Instance.ZoneStepWidth, SpinWheelSystemManager.ZoneStepTime)
+											  _zonesListContent.DOAnchorPosX(-SpinWheelSystemManager.Instance.ZoneStepWidth, SpinWheelSystemManager.ZoneStepTime)
+															   .SetRelative(true)
 															   .SetEase(Ease.InOutSine)
 											 );
 
 			_moveToTheNextZoneSequence.Join(
-											_currentZoneIndicatorBackgroundLeft.rectTransform.DOScale(new Vector3(0f, 1f, 1f), SpinWheelSystemManager.ZoneStepTime / 2f)
+											_currentZoneIndicatorBackgroundLeft.rectTransform.DOScale(new Vector3(0f, 1f, 1f), SpinWheelSystemManager.ZoneStepTime * 0.3f)
 																			   .SetEase(Ease.InOutSine)
 										   );
 
 			_moveToTheNextZoneSequence.Join(
-											_currentZoneIndicatorBackgroundRight.rectTransform.DOScale(new Vector3(1f, 1f, 1f), SpinWheelSystemManager.ZoneStepTime / 2f)
+											_currentZoneIndicatorBackgroundRight.rectTransform.DOScale(new Vector3(1f, 1f, 1f), SpinWheelSystemManager.ZoneStepTime)
 																				.SetEase(Ease.InOutSine)
 										   );
 

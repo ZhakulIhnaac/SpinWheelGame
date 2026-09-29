@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _zoneNumberText: {fileID: 2514803591455147680}
+  _selfRectTransform: {fileID: 5313100451050921560}
 --- !u!1 &3376519646638156903
 GameObject:
   m_ObjectHideFlags: 0
