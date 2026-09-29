@@ -1,14 +1,16 @@
+using Game.SpinWheelSystem.Runtime.Scripts;
 using UnityEngine;
 
 namespace Utils.Singleton
 {
 	public class GameManager : MonoBehaviour
 	{
-		[SerializeField] private SpinWheelPanel _spinWheelPanel;
+		[SerializeField] private MainMenuPanel _mainMenuPanel;
 		
 		private void Awake()
 		{
-			_spinWheelPanel.Initialize();
+			_mainMenuPanel.Initialize();
+			SpinWheelSystemManager.Instance.Initialize();
 		}
 	}
 }

@@ -3,6 +3,7 @@ using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils.Singleton;
 
 public class SpinWheelPanel : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class SpinWheelPanel : MonoBehaviour
 		_wheelElement.Initialize();
 		_exitButton.onClick.AddListener(OnExitButtonClicked);
 		_spinButton.onClick.AddListener(OnSpinButtonClicked);
+		ClosePanel();
 	}
 
 	public void OpenPanel()

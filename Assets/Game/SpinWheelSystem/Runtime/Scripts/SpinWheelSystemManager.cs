@@ -11,7 +11,8 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 	public class SpinWheelSystemManager : SingletonMonoBehaviour<SpinWheelSystemManager>
 	{
 		[SerializeField] private SpinWheelSystemClientConfiguration _spinWheelSystemClientConfiguration;
-		
+		[SerializeField] private SpinWheelPanel _spinWheelPanel;
+	
 		public float ZoneStepWidth => _spinWheelSystemClientConfiguration.ZoneStepWidth;
 		public static float ZoneStepTime => SpinWheelSystemClientConfiguration.ZoneStepTime;
 		public static float WheelSpinTime => SpinWheelSystemClientConfiguration.WheelSpinTime;
@@ -19,6 +20,11 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 
 		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
 		private readonly List<SpinWheelItemDto> _earnedItems = new(16);
+
+		public void Initialize()
+		{
+			_spinWheelPanel.Initialize();
+		}
 		
 		public SpinWheelItemDto[] GetItemsForSpinWheel(SpinZoneId spinZoneId)
 		{
@@ -75,6 +81,11 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			}
 
 			_earnedItems.Clear();
+		}
+
+		public void OpenSpinWheelPanel()
+		{
+			_spinWheelPanel.OpenPanel();
 		}
 
 		#region Queries
