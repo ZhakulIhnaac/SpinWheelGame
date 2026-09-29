@@ -30,6 +30,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			ToggleInteraction(false);
 			gameObject.SetActive(true);
 			_backgroundDarkness.color = new Color(0f, 0f, 0f, 0f);
+			_deathShine.color = new Color(1f, 0.2f, 0.2f, 0f);
 			_bombIcon.color = new Color(1f, 1f, 1f, 0f);
 			_bombIcon.transform.localScale = Vector3.one * 3f;
 
@@ -39,17 +40,19 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_toggleSequence.Append
 				(
-				 _backgroundDarkness.DOFade(0.95f, 0.3f)
+				 _backgroundDarkness.DOFade(0.98f, 0.3f)
 				);
 
 			_toggleSequence.Append
 				(
 				 _bombIcon.DOFade(1f, 0.5f)
+						  .SetEase(Ease.InQuart)
 				);
 
 			_toggleSequence.Join
 				(
 				 _bombIcon.transform.DOScale(1f, 0.5f)
+						  .SetEase(Ease.InQuart)
 				);
 
 			_toggleSequence.Append
@@ -79,14 +82,15 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_toggleSequence.Append
 				(
-					_bombIcon.transform.DOScale(0f, 1f)
+					_bombIcon.transform.DOScale(0f, 0.6f)
 							 .SetEase(Ease.InBack)
 				);
 
 			_toggleSequence.Join
 				(
-				 _bombIcon.transform.DORotate(new Vector3(0f, 360f * 5f, 0f), 1f)
-						  .SetEase(Ease.InOutSine)
+				 _bombIcon.transform.DORotate(new Vector3(0f, 360f * 2f, 0f), 0.6f)
+						  .SetRelative(true)
+						  .SetEase(Ease.InQuart)
 				);
 			
 			_toggleSequence.OnComplete(() =>
