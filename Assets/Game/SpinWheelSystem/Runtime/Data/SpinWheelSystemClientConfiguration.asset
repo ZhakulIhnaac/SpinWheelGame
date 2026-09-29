@@ -130,3 +130,5 @@ MonoBehaviour:
     <ZoneTextColor>k__BackingField: {r: 1, g: 0.8585831, b: 0.3443396, a: 1}
     <ZoneIndicatorBackgroundColor>k__BackingField: {r: 1, g: 0.70151794, b: 0.011764705, a: 1}
   <ZoneIndicatorPrefab>k__BackingField: {fileID: 4722170372279194457, guid: 77ddfbbe22cd94ac7ab0c543b9f428f6, type: 3}
+  <RewardIndicatorPrefab>k__BackingField: {fileID: 2925762015710183240, guid: 4cb0b5d3922594a15aeb4b669828e1b3, type: 3}
+  <ItemAddedSoundEffect>k__BackingField: {fileID: 0}

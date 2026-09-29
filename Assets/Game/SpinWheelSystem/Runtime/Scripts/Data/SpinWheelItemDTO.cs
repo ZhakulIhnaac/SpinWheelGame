@@ -2,12 +2,12 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 {
 	public struct SpinWheelItemDto
 	{
-		public SpinWheelItem SpinWheelItem { get; private set; }
+		public SpinWheelItemId SpinWheelItemId { get; private set; }
 		public int Amount { get; private set; }
 
-		public SpinWheelItemDto(SpinWheelItem spinWheelItem, int amount)
+		public SpinWheelItemDto(SpinWheelItemId spinWheelItemId, int amount)
 		{
-			SpinWheelItem = spinWheelItem;
+			SpinWheelItemId = spinWheelItemId;
 			Amount = amount;
 		}
 	}

@@ -9,54 +9,54 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 		public const int SuperZoneInterval = 30;
 		public const int SafeZoneInterval = 5;
 
-		public static readonly RandomWeighedItemBag<SpinWheelItem> BasicItems = new(new[]
+		public static readonly RandomWeighedItemBag<SpinWheelItemId> BasicItems = new(new[]
 																			 {
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.AviatorGlassesEaster, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.BaseballCapEaster, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Cash, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestBig, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestBronze, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestSilver, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestSmall, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestStandard, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Gold, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.MleBayonetEasterTime, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.MleBayonetSummerVice, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.GrenadeM26, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.GrenadeM67, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.HealthShot2NeuroStim, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.HealthShot2Regenerator, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Molotov, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ArmorPoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.KnifePoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.PistolPoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.RiflePoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ShotgunPoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.SmgPoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.SniperPoints, 1),
-																				 new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.VestPoints, 1)
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.AviatorGlassesEaster, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.BaseballCapEaster, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Cash, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestBig, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestBronze, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestSilver, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestSmall, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestStandard, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Gold, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.MleBayonetEasterTime, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.MleBayonetSummerVice, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.GrenadeM26, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.GrenadeM67, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.HealthShot2NeuroStim, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.HealthShot2Regenerator, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Molotov, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ArmorPoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.KnifePoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.PistolPoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.RiflePoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ShotgunPoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.SmgPoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.SniperPoints, 1),
+																				 new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.VestPoints, 1)
 																			 }
 																			);
 
-		public static readonly RandomWeighedItemBag<SpinWheelItem> SuperItems = new(new[]
+		public static readonly RandomWeighedItemBag<SpinWheelItemId> SuperItems = new(new[]
 																					{
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestGold, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ChestSuper, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.HelmetPumpkin, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Tier1Shotgun, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Tier2Mle, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Tier2Rifle, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Tier3Shotgun, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Tier3Smg, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.Tier3Sniper, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ArmorPoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.KnifePoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.PistolPoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.RiflePoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.ShotgunPoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.SmgPoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.SniperPoints, 1),
-																						new RandomWeightedItemBagEntry<SpinWheelItem>(SpinWheelItem.VestPoints, 1)
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestGold, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ChestSuper, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.HelmetPumpkin, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Tier1Shotgun, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Tier2Mle, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Tier2Rifle, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Tier3Shotgun, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Tier3Smg, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.Tier3Sniper, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ArmorPoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.KnifePoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.PistolPoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.RiflePoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.ShotgunPoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.SmgPoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.SniperPoints, 1),
+																						new RandomWeightedItemBagEntry<SpinWheelItemId>(SpinWheelItemId.VestPoints, 1)
 																					}
 																				   );
 

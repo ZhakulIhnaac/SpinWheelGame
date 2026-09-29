@@ -13,7 +13,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		
 		public void SetItemIdAndAmount(SpinWheelItemDto spinWheelItem)
 		{
-			var icon = SpinWheelSystemManager.Instance.GetItemSpecification(spinWheelItem.SpinWheelItem).Icon;
+			var icon = SpinWheelSystemManager.Instance.GetItemSpecification(spinWheelItem.SpinWheelItemId).Icon;
 			_amountText.SetText($"{spinWheelItem.Amount}");
 		}
 	}

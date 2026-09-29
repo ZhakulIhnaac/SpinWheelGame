@@ -9,6 +9,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 {
 	public class SpinWheelPanelWheelElement : MonoBehaviour
 	{
+		[field: SerializeField] public Transform EarnedRewardPosition;
 		[SerializeField] private Image _pin;
 		[SerializeField] private Image _wheel;
 		[SerializeField] private SpinWheelItemIndicator[] _wheelItemIndicators;
@@ -42,7 +43,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_spinSequence.Append
 				(
-				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, _spinWheelItemStepAngle * itemNumber - 40f), 0.2f)
+				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, _spinWheelItemStepAngle * itemNumber - 40), 0.2f)
 					   .SetRelative(true)
 				);
 

@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.SharedGameSystems.SoundSystem.Scripts.Data;
 using UnityEngine;
-using UnityEngine.Audio;
 using Utils.Singleton;
 using Random = UnityEngine.Random;
 
 namespace Game.SharedGameSystems.SoundSystem.Scripts.Controllers
 {
-	public class SoundManager : SingletonMonoBehaviour<SoundManager>
+	public class SoundSystemManager : SingletonMonoBehaviour<SoundSystemManager>
 	{
 		private float RandomizedPitchValue => 1f + Random.Range(-0.2f, 0.2f);
 

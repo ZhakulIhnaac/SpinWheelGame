@@ -14,12 +14,13 @@ public class SpinWheelPanel : MonoBehaviour
 	[SerializeField] private Button _spinButton;
 
 	private Coroutine _lockInteractionCoroutine;
-	
+	private Coroutine _spinAnimationCoroutine;
+
 	public void Initialize()
 	{
-		_rewardsArea.Initialize();
-		_zonesArea.Initialize();
 		_wheelElement.Initialize();
+		_zonesArea.Initialize();
+		_rewardsArea.Initialize(_wheelElement.EarnedRewardPosition);
 		_exitButton.onClick.AddListener(OnExitButtonClicked);
 		_spinButton.onClick.AddListener(OnSpinButtonClicked);
 		SetNewRewards();
@@ -36,8 +37,17 @@ public class SpinWheelPanel : MonoBehaviour
 
 	private void OnSpinButtonClicked()
 	{
-		_wheelElement.SpinWheelToTheItem(SpinWheelSystemManager.Instance.GetRewardNumberForSpinningTheWheel());
-		LockInteractionForTime(SpinWheelSystemManager.WheelSpinTime + SpinWheelSystemManager.RewardGiveAnimationTime);
+		if (_spinAnimationCoroutine != null) StopCoroutine(_spinAnimationCoroutine);
+
+		_spinAnimationCoroutine = StartCoroutine(SpinAnimationCoroutine());
+
+		IEnumerator SpinAnimationCoroutine()
+		{
+			LockInteractionForTime(SpinWheelSystemManager.WheelSpinTime + SpinWheelSystemManager.RewardGiveAnimationTime);
+			_wheelElement.SpinWheelToTheItem(SpinWheelSystemManager.Instance.GetRewardNumberForSpinningTheWheel());
+			yield return new WaitForSeconds(SpinWheelSystemManager.WheelSpinTime);
+			_rewardsArea.PlayRewardEarnAnimation();
+		}
 	}
 
 	private void OnExitButtonClicked()
@@ -45,30 +55,30 @@ public class SpinWheelPanel : MonoBehaviour
 		SpinWheelSystemManager.Instance.AddEarnedItemsIntoInventory();
 		ClosePanel();
 	}
-	
+
 	private void ClosePanel()
 	{
 		gameObject.SetActive(false);
 	}
-	
+
 	#region Utils
 	private void LockInteractionForTime(float time)
 	{
 		if (_lockInteractionCoroutine != null) StopCoroutine(_lockInteractionCoroutine);
 
 		_lockInteractionCoroutine = StartCoroutine(LockInteractionCoroutine());
-		
+
 		IEnumerator LockInteractionCoroutine()
 		{
 			ToggleInteraction(false);
 			yield return new WaitForSeconds(time);
 			ToggleInteraction(true);
 		}
-		
+
 		void ToggleInteraction(bool isInteractable)
 		{
 			_exitButton.interactable = isInteractable;
-			_spinButton.interactable = isInteractable;	
+			_spinButton.interactable = isInteractable;
 		}
 	}
 

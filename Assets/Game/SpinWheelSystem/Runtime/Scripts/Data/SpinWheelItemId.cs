@@ -3,7 +3,7 @@ using System;
 namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 {
 	[Serializable]
-	public enum SpinWheelItem
+	public enum SpinWheelItemId
 	{
 		Bomb = 0,
 		AviatorGlassesEaster = 1,

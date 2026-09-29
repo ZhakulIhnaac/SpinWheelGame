@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AssetKits.ParticleImage;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
@@ -19,7 +20,10 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		public static float RewardGiveAnimationTime => SpinWheelSystemClientConfiguration.RewardGiveAnimationTime;
 
 		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
-		private readonly List<SpinWheelItemDto> _earnedItems = new(16);
+		private readonly Dictionary<SpinWheelItemId, int> _earnedItems = new(16);
+		
+		public SpinWheelItemDto LastItemEarned { get; private set; }
+		public AudioClip ItemAddedSoundEffect => _spinWheelSystemClientConfiguration.ItemAddedSoundEffect;
 		private int _currentZoneNumber;
 		
 		public void Initialize()
@@ -37,7 +41,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			
 			if (spinZoneId == SpinZoneId.Basic)
 			{
-				_displayingSpinWheelItems[arrayIterationIndex++] = new SpinWheelItemDto(SpinWheelItem.Bomb, 1);
+				_displayingSpinWheelItems[arrayIterationIndex++] = new SpinWheelItemDto(SpinWheelItemId.Bomb, 1);
 			}
 
 			var itemsList = spinZoneId switch
@@ -69,9 +73,9 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		{
 			var index = Random.Range(0, SpinWheelSystemLogicConfiguration.SpinWheelItemsCount);
 
-			if (_displayingSpinWheelItems[index].SpinWheelItem != SpinWheelItem.Bomb)
+			if (_displayingSpinWheelItems[index].SpinWheelItemId != SpinWheelItemId.Bomb)
 			{
-				_earnedItems.Add(_displayingSpinWheelItems[index]);
+				AddToEarnedItems(_displayingSpinWheelItems[index]);
 			}
 			
 			return index + 1;
@@ -81,7 +85,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		{
 			foreach (var iteratingEarnedItem in _earnedItems)
 			{
-				Debug.Log($"{iteratingEarnedItem.Amount} {_spinWheelSystemClientConfiguration.GetItemSpecification(iteratingEarnedItem.SpinWheelItem).DisplayName}(s) added into the inventory!");	
+				Debug.Log($"{iteratingEarnedItem.Value} {_spinWheelSystemClientConfiguration.GetItemSpecification(iteratingEarnedItem.Key).DisplayName}(s) added into the inventory!");	
 			}
 
 			_earnedItems.Clear();
@@ -98,10 +102,20 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			_earnedItems.Clear();
 		}
 
+		#region Utils
+		private void AddToEarnedItems(SpinWheelItemDto itemDto)
+		{
+			_earnedItems.TryAdd(itemDto.SpinWheelItemId, 0);
+			_earnedItems[itemDto.SpinWheelItemId] += itemDto.Amount;
+			LastItemEarned = itemDto;
+		}
+		#endregion
+		
 		#region Queries
 		public SpinWheelPanelZoneIndicator GetZoneIndicatorPrefab() => _spinWheelSystemClientConfiguration.ZoneIndicatorPrefab;
+		public SpinWheelPanelRewardIndicator GetRewardIndicatorPrefab() => _spinWheelSystemClientConfiguration.RewardIndicatorPrefab;
 		public int GetZoneCount() => SpinWheelSystemLogicConfiguration.SpinWheelZonesCount;
-		public SpinWheelSystemItemSpecification GetItemSpecification(SpinWheelItem spinWheelItem) => _spinWheelSystemClientConfiguration.GetItemSpecification(spinWheelItem);
+		public SpinWheelSystemItemSpecification GetItemSpecification(SpinWheelItemId spinWheelItemId) => _spinWheelSystemClientConfiguration.GetItemSpecification(spinWheelItemId);
 		public SpinWheelSystemZoneSpecification GetZoneSpecification(SpinZoneId spinZoneId) => _spinWheelSystemClientConfiguration.GetZoneSpecification(spinZoneId);
 		public SpinZoneId GetSpinZoneForNumber(int zoneNumber)
 		{
@@ -110,6 +124,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			if (zoneNumber % SpinWheelSystemLogicConfiguration.SafeZoneInterval == 0) return SpinZoneId.Safe;
 			return SpinZoneId.Basic;
 		}
+		public int GetAmountOfEarnedItem(SpinWheelItemId itemId) => _earnedItems.GetValueOrDefault(itemId, 0);
 		#endregion
 	}
 }
