@@ -26,7 +26,8 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		public Tween GetOpeningAnimation()
 		{
 			RectTransform.anchoredPosition = new Vector2(_originalAnchoredPosition.x, -_originalAnchoredPosition.y);
-			return RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.5f);
+			return RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.4f)
+								.SetEase(Ease.OutCubic);
 		}
 
 		public void MoveToTheCurrentZone()

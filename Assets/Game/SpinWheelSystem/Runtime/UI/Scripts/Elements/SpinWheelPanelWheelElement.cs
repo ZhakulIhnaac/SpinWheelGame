@@ -29,7 +29,8 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		public Tween GetOpeningAnimation()
 		{
 			RectTransform.anchoredPosition = new Vector2(_originalAnchoredPosition.x, -Screen.height);
-			return RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.5f);
+			return RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.6f)
+								.SetEase(Ease.OutCubic);
 		}
 
 		public void SpinWheelToTheItem(int itemNumber)
