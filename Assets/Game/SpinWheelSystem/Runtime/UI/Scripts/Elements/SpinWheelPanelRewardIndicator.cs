@@ -63,7 +63,8 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			_itemAddedEffectTween?.Kill();
 
 			_icon.transform.localScale = Vector2.one;
-			_itemAddedEffectTween = _icon.transform.DOScale(Vector2.one * 1.05f, 0.02f).SetLoops(-1, LoopType.Yoyo);
+			_itemAddedEffectTween = _icon.transform.DOScale(Vector2.one * 1.2f, 0.02f)
+										 .SetLoops(2, LoopType.Yoyo);
 
 			SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.ItemAddedSoundEffect, SoundEffectPitchMode.GetHigherPitch, $"itemAddedSoundEffect", 0.015f);
 			HapticSystemsManager.Instance.PlayLightHaptic();

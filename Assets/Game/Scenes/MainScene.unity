@@ -4833,7 +4833,7 @@ MonoBehaviour:
   _emitterConstraintEnabled:
     enabled: 0
   _emitterConstraintTransform: {fileID: 0}
-  _shape: 1
+  _shape: 0
   _spread: 0
   _spreadLoop: 1
   _startDelay: 0
@@ -4999,8 +4999,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ConstantMin: 1.5
-    m_ConstantMax: 2
+    m_ConstantMin: 1
+    m_ConstantMax: 1.2
   _startSpeed:
     m_Mode: 3
     m_CurveMultiplier: 0
@@ -5016,8 +5016,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ConstantMin: 1
-    m_ConstantMax: 15
+    m_ConstantMin: 3
+    m_ConstantMax: 5
   _colorOverLifetime:
     m_Mode: 1
     m_GradientMin:
@@ -5750,38 +5750,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -3.7341385
+        outSlope: -3.7341385
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.041658696
       - serializedVersion: 3
-        time: 0.23662984
-        value: -0.16690838
-        inSlope: -0.18505974
-        outSlope: -0.18505974
+        time: 0.36512926
+        value: -0.006009437
+        inSlope: -0.00033951018
+        outSlope: -0.00033951018
         tangentMode: 0
-        weightedMode: 2
+        weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.3690642
+        outWeight: 0.26728687
       - serializedVersion: 3
-        time: 0.30901414
-        value: 0.06097493
-        inSlope: -0.48188597
-        outSlope: -0.48188597
+        time: 0.9964355
+        value: 2
+        inSlope: 4.0568686
+        outSlope: 4.0568686
         tangentMode: 0
-        weightedMode: 3
-        inWeight: 0.5200996
-        outWeight: 0.7047364
-      - serializedVersion: 3
-        time: 0.3598097
-        value: 0
-        inSlope: 0.0051522027
-        outSlope: 0.0051522027
-        tangentMode: 0
-        weightedMode: 1
-        inWeight: 0.37683383
+        weightedMode: 0
+        inWeight: 0.027373731
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -5808,7 +5799,7 @@ MonoBehaviour:
     m_ConstantMax: -9.81
   _targetModule:
     enabled: 1
-  _attractorTarget: {fileID: 0}
+  _attractorTarget: {fileID: 1723026978}
   _toTarget:
     m_Mode: 2
     m_CurveMultiplier: 1
@@ -5816,17 +5807,17 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.6946691
-        value: -0.0020119883
-        inSlope: 0.000033206496
-        outSlope: 0.000033206496
+        time: 0.003322259
+        value: -0.0023528934
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
-        weightedMode: 2
-        inWeight: 0
-        outWeight: 0.8866889
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.9976349
         inSlope: 7.236108
         outSlope: 7.236108
         tangentMode: 0
@@ -5840,22 +5831,22 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.69418335
-        value: -0.0020141602
-        inSlope: 0
-        outSlope: 0
+        time: 0
+        value: 0
+        inSlope: 0.2810043
+        outSlope: 0.2810043
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.15946844
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 4.5544767
-        outSlope: 4.5544767
+        time: 0.9966736
+        value: 1.0032272
+        inSlope: 1.088532
+        outSlope: 1.088532
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.042658035
+        inWeight: 0.09966779
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -5868,7 +5859,7 @@ MonoBehaviour:
   _gravityModule:
     enabled: 0
   _vortexModule:
-    enabled: 1
+    enabled: 0
   _velocityModule:
     enabled: 1
   _velocitySpace: 0
