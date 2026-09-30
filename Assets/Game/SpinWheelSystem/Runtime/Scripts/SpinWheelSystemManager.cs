@@ -160,5 +160,13 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			return new Tuple<Sprite, Sprite>(currentZoneSpecification.WheelSprite, currentZoneSpecification.PinSprite);
 		}
 		#endregion
+
+		#region Tests
+		public void TestOpenBombOverlay()
+		{
+			_spinWheelPanel.TestOpenBombOverlay();
+		}
+		#endregion
+		
 	}
 }

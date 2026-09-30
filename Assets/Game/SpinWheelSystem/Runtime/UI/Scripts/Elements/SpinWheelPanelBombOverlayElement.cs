@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Game.InventorySystem.Runtime.Scripts;
+using Game.InventorySystem.Runtime.Scripts.Elements;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private Image _bombIcon;
 		[SerializeField] private Image _deathShine;
 		[SerializeField] private TextMeshProUGUI _reviveCoinAmountText;
+		[SerializeField] private ResourceAmountIndicator _coinIndicator;
 		[SerializeField] private Button _giveUpButton;
 		[SerializeField] private Button _reviveButton;
 
@@ -23,6 +25,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		
 		public void Initialize()
 		{
+			_coinIndicator.Initialize();
 			_reviveButton.onClick.AddListener(OnReviveButtonClicked);
 			_giveUpButton.onClick.AddListener(OnGiveUpButtonClicked);
 			gameObject.SetActive(false);

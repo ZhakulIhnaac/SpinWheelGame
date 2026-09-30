@@ -166,4 +166,10 @@ public class SpinWheelPanel : MonoBehaviour
 		_spinButton.interactable = _inputLockCounter == 0;
 	}
 	#endregion
+	
+	public void TestOpenBombOverlay()
+	{
+		ToggleInteraction(false);
+		_bombOverlayElement.Open();
+	}
 }
