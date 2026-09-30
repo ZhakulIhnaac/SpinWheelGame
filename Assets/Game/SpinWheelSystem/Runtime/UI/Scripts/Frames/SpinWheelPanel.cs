@@ -137,6 +137,9 @@ public class SpinWheelPanel : MonoBehaviour
 
 	private void ClosePanel()
 	{
+		_rewardsArea.ResetElement();
+		_zonesArea.ResetElement();
+		_wheelElement.ResetElement();
 		gameObject.SetActive(false);
 	}
 

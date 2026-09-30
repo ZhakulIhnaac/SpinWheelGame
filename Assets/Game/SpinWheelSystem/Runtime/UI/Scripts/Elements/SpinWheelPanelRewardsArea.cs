@@ -15,11 +15,12 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private readonly Dictionary<SpinWheelItemId, SpinWheelPanelRewardIndicator> _rewardIndicators = new(16);
 
+		private Transform _wheelElementEarnedRewardPosition;
 		private Vector2 _originalAnchoredPosition;
 		
 		public void Initialize(Transform wheelElementEarnedRewardPosition)
 		{
-			_resourceCollectParticle.transform.position = wheelElementEarnedRewardPosition.position;
+			_wheelElementEarnedRewardPosition = wheelElementEarnedRewardPosition;
 			_originalAnchoredPosition = RectTransform.anchoredPosition;
 		}
 
@@ -36,6 +37,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			var indicator = _rewardIndicators.TryGetValue(itemEarned.SpinWheelItemId, out SpinWheelPanelRewardIndicator value) ? value : CreateNewRewardIndicator(itemEarned.SpinWheelItemId);
 			var itemSpecification = SpinWheelSystemManager.Instance.GetItemSpecification(itemEarned.SpinWheelItemId);
 			
+			_resourceCollectParticle.transform.position = _wheelElementEarnedRewardPosition.position;
 			_resourceCollectParticle.attractorTarget = indicator.AttractorTargetPosition;
 			_resourceCollectParticle.sprite = itemSpecification.Icon;
 			_resourceCollectParticle.rateOverLifetime = Mathf.Clamp(itemEarned.Amount, 1, 5);
@@ -69,7 +71,8 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			{
 				Destroy(indicator.gameObject);
 			}
-		
+
+			_resourceCollectParticle.Stop();
 			_rewardIndicators.Clear();
 		}
 	}
