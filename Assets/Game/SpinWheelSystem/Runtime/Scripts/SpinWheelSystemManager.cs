@@ -26,6 +26,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		public SpinWheelItemDto LastItemEarned { get; private set; }
 		public SpinWheelItemDto[] DisplayingSpinWheelItems => _displayingSpinWheelItems;
 		public AudioClip ItemAddedSoundEffect => _spinWheelSystemClientConfiguration.ItemAddedSoundEffect;
+		public AudioClip WheelPinTickSound => _spinWheelSystemClientConfiguration.WheelPinTickSound;
 		private int _currentZoneNumber;
 
 		public void Initialize()

@@ -1,5 +1,8 @@
 using System;
 using DG.Tweening;
+using Game.SharedGameSystems.HapticSystem.Controllers;
+using Game.SharedGameSystems.SoundSystem.Scripts.Controllers;
+using Game.SharedGameSystems.SoundSystem.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using UnityEngine;
@@ -30,7 +33,14 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private void Update()
 		{
+			var currentLocalRotationOnZAxis = _pin.rectTransform.localRotation.z;
 			_pin.rectTransform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(_pin.rectTransform.localRotation.z, _targetPinRotation, Time.deltaTime * 80f));
+
+			if (currentLocalRotationOnZAxis < _pin.rectTransform.localRotation.z)
+			{
+				SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.WheelPinTickSound);
+				HapticSystemsManager.Instance.PlayLightHaptic();
+			}
 		}
 
 		public Tween GetOpeningAnimation()
