@@ -8,16 +8,25 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 {
 	public class SpinWheelPanelZonesArea : MonoBehaviour
 	{
+		[field: SerializeField] public RectTransform RectTransform;
 		[SerializeField] private RectTransform _zonesListContent;
 		[SerializeField] private Image _currentZoneIndicatorBackgroundLeft;
 		[SerializeField] private Image _currentZoneIndicatorBackgroundRight;
 
 		private Sequence _moveToTheNextZoneSequence;
-
+		private Vector2 _originalAnchoredPosition;
+		
 		public void Initialize()
 		{
+			_originalAnchoredPosition = RectTransform.anchoredPosition;
 			PopulateZoneIndicators();
 			ResetElement();
+		}
+
+		public Tween GetOpeningAnimation()
+		{
+			RectTransform.anchoredPosition = new Vector2(_originalAnchoredPosition.x, -_originalAnchoredPosition.y);
+			return RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.5f);
 		}
 
 		public void MoveToTheCurrentZone()

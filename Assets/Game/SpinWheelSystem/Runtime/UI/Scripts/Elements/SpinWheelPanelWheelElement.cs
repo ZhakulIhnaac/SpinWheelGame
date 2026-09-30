@@ -8,7 +8,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 {
 	public class SpinWheelPanelWheelElement : MonoBehaviour
 	{
-		[field: SerializeField] public RectTransform SelfRectTransform;
+		[field: SerializeField] public RectTransform RectTransform;
 		[field: SerializeField] public Transform EarnedRewardPosition;
 		[SerializeField] private Image _pin;
 		[SerializeField] private Image _wheel;
@@ -18,10 +18,18 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		
 		private Sequence _spinSequence;
 		private Sequence _zoneChangeSequence;
+		private Vector2 _originalAnchoredPosition;
 
 		public void Initialize()
 		{
+			_originalAnchoredPosition = RectTransform.anchoredPosition;
 			ResetElement();
+		}
+
+		public Tween GetOpeningAnimation()
+		{
+			RectTransform.anchoredPosition = new Vector2(_originalAnchoredPosition.x, -Screen.height);
+			return RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.5f);
 		}
 
 		public void SpinWheelToTheItem(int itemNumber)
@@ -66,7 +74,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_zoneChangeSequence.Append
 				(
-				 SelfRectTransform.DOAnchorPosY(-Screen.height, 0.3f)
+				 RectTransform.DOAnchorPosY(-Screen.height, 0.3f)
 								  .SetRelative(true)
 								  .SetEase(Ease.InSine)
 				);
@@ -75,7 +83,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_zoneChangeSequence.Append
 				(
-				 SelfRectTransform.DOAnchorPosY(0, 0.3f)
+				 RectTransform.DOAnchorPosY(0, 0.3f)
 								  .SetEase(Ease.InSine)
 				);
 

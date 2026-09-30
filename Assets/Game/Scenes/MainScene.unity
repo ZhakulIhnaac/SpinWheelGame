@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a63948c21c490ca528798aa38062c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelfRectTransform: {fileID: 443059969}
+  RectTransform: {fileID: 443059969}
   EarnedRewardPosition: {fileID: 400162920}
   _pin: {fileID: 464836865}
   _wheel: {fileID: 283579704}
@@ -2492,6 +2492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54f26de55a754c3ba7a3f557b4f7615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RectTransform: {fileID: 1030049420}
   _rewardsListContent: {fileID: 883075375}
   _resourceCollectParticle: {fileID: 1616304427017703471}
 --- !u!114 &1030049422
@@ -4583,6 +4584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607687bce592491a82253110cd88c001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RectTransform: {fileID: 2021603493}
   _zonesListContent: {fileID: 1398048565}
   _currentZoneIndicatorBackgroundLeft: {fileID: 2087353207}
   _currentZoneIndicatorBackgroundRight: {fileID: 985018365}

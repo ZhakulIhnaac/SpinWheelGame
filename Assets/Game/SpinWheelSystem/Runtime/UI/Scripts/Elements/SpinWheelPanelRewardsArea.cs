@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using AssetKits.ParticleImage;
-using AssetKits.ParticleImage.Enumerations;
 using DG.Tweening;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
@@ -10,14 +9,24 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 {
 	public class SpinWheelPanelRewardsArea : MonoBehaviour
 	{
+		[field: SerializeField] public RectTransform RectTransform;
 		[SerializeField] private RectTransform _rewardsListContent;
 		[SerializeField] private ParticleImage _resourceCollectParticle;
 
 		private readonly Dictionary<SpinWheelItemId, SpinWheelPanelRewardIndicator> _rewardIndicators = new(16);
+
+		private Vector2 _originalAnchoredPosition;
 		
 		public void Initialize(Transform wheelElementEarnedRewardPosition)
 		{
 			_resourceCollectParticle.transform.position = wheelElementEarnedRewardPosition.position;
+			_originalAnchoredPosition = RectTransform.anchoredPosition;
+		}
+
+		public Tween GetOpeningAnimation()
+		{
+			RectTransform.anchoredPosition = new Vector2(-_originalAnchoredPosition.x, _originalAnchoredPosition.y);
+			return RectTransform.DOAnchorPosX(_originalAnchoredPosition.x, 0.5f);
 		}
 
 		public void PlayRewardEarnAnimation()

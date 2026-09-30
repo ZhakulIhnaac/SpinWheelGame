@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using DG.Tweening;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
@@ -17,11 +17,12 @@ public class SpinWheelPanel : MonoBehaviour
 
 	private Coroutine _lockInteractionCoroutine;
 	private Coroutine _spinAnimationCoroutine;
+	private Sequence _openingAnimationSequence;
 
 	public void Initialize()
 	{
 		_bombOverlayElement.Closed += OnBombOverlayClosed;
-		
+
 		_bombOverlayElement.Initialize();
 		_wheelElement.Initialize();
 		_zonesArea.Initialize();
@@ -38,6 +39,30 @@ public class SpinWheelPanel : MonoBehaviour
 		_wheelElement.ResetElement();
 		_wheelElement.UpdateForCurrentZone();
 		gameObject.SetActive(true);
+		PlayOpeningAnimation();
+	}
+
+	private void PlayOpeningAnimation()
+	{
+		_openingAnimationSequence?.Kill();
+		_openingAnimationSequence = DOTween.Sequence();
+
+		_openingAnimationSequence.Append
+			(
+			 _rewardsArea.GetOpeningAnimation()
+			 );
+
+		_openingAnimationSequence.Join
+			(
+			 _zonesArea.GetOpeningAnimation()
+			);
+
+		_openingAnimationSequence.Join
+			(
+			 _wheelElement.GetOpeningAnimation()
+			);
+
+		_openingAnimationSequence.Play();
 	}
 
 	private void OnSpinButtonClicked()
@@ -67,7 +92,7 @@ public class SpinWheelPanel : MonoBehaviour
 			}
 		}
 	}
-	
+
 	private void OnExitButtonClicked()
 	{
 		SpinWheelSystemManager.Instance.DoOnSpinWheelPanelClosing(true);
@@ -86,7 +111,7 @@ public class SpinWheelPanel : MonoBehaviour
 			TryToAdvanceToTheNextZone();
 		}
 	}
-	
+
 	private void TryToAdvanceToTheNextZone()
 	{
 		if (SpinWheelSystemManager.Instance.TryToAdvanceToTheNextZone())
