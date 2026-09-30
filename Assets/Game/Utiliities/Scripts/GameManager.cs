@@ -11,6 +11,7 @@ namespace Utils.Singleton
 		
 		private void Awake()
 		{
+			Application.targetFrameRate = 60;
 			_mainMenuPanel.Initialize();
 			HapticSystemsManager.Instance.Initialize();
 			SoundSystemManager.Instance.Initialize();

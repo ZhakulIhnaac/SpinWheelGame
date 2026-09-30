@@ -138,4 +138,4 @@ MonoBehaviour:
   <ZoneIndicatorPrefab>k__BackingField: {fileID: 4722170372279194457, guid: 77ddfbbe22cd94ac7ab0c543b9f428f6, type: 3}
   <RewardIndicatorPrefab>k__BackingField: {fileID: 2925762015710183240, guid: 4cb0b5d3922594a15aeb4b669828e1b3, type: 3}
   <ItemAddedSoundEffect>k__BackingField: {fileID: 8300000, guid: 25411bb66db7c4a4aba12bf13da34ae5, type: 3}
-  <WheelPinTickSound>k__BackingField: {fileID: 8300000, guid: 3ac0e974cf13c4d9ca2623c18e3b7a3c, type: 3}
+  <WheelPinTickSound>k__BackingField: {fileID: 8300000, guid: 52a27a15d50414aaa8c1a07203175a9a, type: 3}

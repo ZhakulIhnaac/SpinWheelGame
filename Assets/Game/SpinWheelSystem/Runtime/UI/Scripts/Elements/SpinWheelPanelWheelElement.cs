@@ -24,6 +24,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		private Sequence _zoneChangeSequence;
 		private Vector2 _originalAnchoredPosition;
 		private float _targetPinRotation;
+		private float _pinEffectCountdownTime;
 
 		public void Initialize()
 		{
@@ -33,11 +34,19 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private void Update()
 		{
+			HandlePinEffect();
+		}
+
+		private void HandlePinEffect()
+		{
 			var currentLocalRotationOnZAxis = _pin.rectTransform.localRotation.z;
 			_pin.rectTransform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(_pin.rectTransform.localRotation.z, _targetPinRotation, Time.deltaTime * 80f));
 
-			if (currentLocalRotationOnZAxis < _pin.rectTransform.localRotation.z)
+			_pinEffectCountdownTime = Mathf.Max(-0.5f, _pinEffectCountdownTime - Time.deltaTime);
+
+			if (_pinEffectCountdownTime < 0f && currentLocalRotationOnZAxis < _pin.rectTransform.localRotation.z)
 			{
+				_pinEffectCountdownTime = 0.05f;
 				SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.WheelPinTickSound);
 				HapticSystemsManager.Instance.PlayLightHaptic();
 			}
