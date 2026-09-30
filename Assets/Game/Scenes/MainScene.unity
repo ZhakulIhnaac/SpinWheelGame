@@ -5414,6 +5414,7 @@ MonoBehaviour:
   _bombIcon: {fileID: 1547601221}
   _deathShine: {fileID: 687920251}
   _reviveCoinAmountText: {fileID: 1218331205}
+  _coinIndicator: {fileID: 1456581460}
   _giveUpButton: {fileID: 359608093}
   _reviveButton: {fileID: 2005676212}
 --- !u!114 &2090870923

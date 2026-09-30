@@ -14,10 +14,10 @@ namespace Utilities
 		{
 			Application.targetFrameRate = 60;
 			_mainMenuPanel.Initialize();
+			InventorySystemManager.Instance.Initialize();
 			HapticSystemsManager.Instance.Initialize();
 			SoundSystemManager.Instance.Initialize();
 			SpinWheelSystemManager.Instance.Initialize();
-			InventorySystemManager.Instance.Initialize();
 		}
 	}
 }
