@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
@@ -19,11 +20,17 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		private Sequence _spinSequence;
 		private Sequence _zoneChangeSequence;
 		private Vector2 _originalAnchoredPosition;
+		private float _targetPinRotation;
 
 		public void Initialize()
 		{
 			_originalAnchoredPosition = RectTransform.anchoredPosition;
 			ResetElement();
+		}
+
+		private void Update()
+		{
+			_pin.rectTransform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(_pin.rectTransform.localRotation.z, _targetPinRotation, Time.deltaTime * 80f));
 		}
 
 		public Tween GetOpeningAnimation()
@@ -35,7 +42,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		public void SpinWheelToTheItem(int itemNumber)
 		{
-			var totalSpinAngle = 40 + 360f * 8f + (360f - (itemNumber - 1) * _spinWheelItemStepAngle);
+			var totalSpinAngle = 20 + 360f * 8f + (360f - (itemNumber - 1) * _spinWheelItemStepAngle);
 
 			_spinSequence?.Kill();
 			_spinSequence = DOTween.Sequence();
@@ -47,7 +54,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			
 			_spinSequence.Append
 				(
-				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, 40), 0.3f)
+				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, 20), 0.3f)
 					   .SetRelative(true)
 				);
 
@@ -58,10 +65,18 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 					   .SetEase(Ease.OutSine)
 				);
 
+			_spinSequence.Join
+				(
+				 DOVirtual.Float(0f, totalSpinAngle / 12f, SpinWheelSystemManager.WheelSpinTime - 0.7f, UpdatePinTargetRotation)
+					   .SetEase(Ease.OutSine)
+				);
+
 			_spinSequence.Append
 				(
 				 transform.DOScale(Vector3.one, 0.2f)
 				);
+			
+			_spinSequence.OnComplete(() => UpdatePinTargetRotation(0f));
 
 			_spinSequence.Play();
 		}
@@ -110,6 +125,11 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		{
 			_pin.rectTransform.localRotation = Quaternion.identity;
 			_wheel.rectTransform.localRotation = Quaternion.identity;
+		}
+
+		private void UpdatePinTargetRotation(float value)
+		{
+			_targetPinRotation = value % 15f;
 		}
 
 		private void OnDestroy()
