@@ -26,6 +26,8 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		public void SpinWheelToTheItem(int itemNumber)
 		{
+			var totalSpinAngle = 40 + 360f * 3f + (itemNumber - 1) * _spinWheelItemStepAngle;
+			
 			_spinSequence?.Kill();
 			_spinSequence = DOTween.Sequence();
 
@@ -37,16 +39,22 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_spinSequence.Append
 				(
-				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, -360f * 6f), SpinWheelSystemManager.WheelSpinTime - 0.5f)
+				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, -totalSpinAngle * 0.5f), (SpinWheelSystemManager.WheelSpinTime - 0.3f) * 0.5f)
 					   .SetRelative(true)
 					   .SetEase(Ease.Linear)
 				);
 
 			_spinSequence.Append
 				(
-				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, _spinWheelItemStepAngle * itemNumber - 40), 0.2f)
+				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, -totalSpinAngle * 0.5f), (SpinWheelSystemManager.WheelSpinTime - 0.3f) * 0.5f)
 					   .SetRelative(true)
 				);
+
+//			_spinSequence.Append
+//				(
+//				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, _spinWheelItemStepAngle * itemNumber - 40), 0.2f)
+//					   .SetRelative(true)
+//				);
 
 			_spinSequence.Play();
 		}

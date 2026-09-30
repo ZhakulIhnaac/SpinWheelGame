@@ -28,7 +28,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			
 			_resourceCollectParticle.attractorTarget = indicator.AttractorTargetPosition;
 			_resourceCollectParticle.sprite = itemSpecification.Icon;
-			_resourceCollectParticle.rateOverLifetime = Mathf.Clamp(itemEarned.Amount, 1, 10);
+			_resourceCollectParticle.rateOverLifetime = Mathf.Clamp(itemEarned.Amount, 1, 5);
 			_resourceCollectParticle.onFirstParticleFinished.AddListener(DoOnFirstParticleFinished);
 			_resourceCollectParticle.onAnyParticleFinished.AddListener(DoOnAnyParticleFinished);
 
