@@ -73,6 +73,8 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			_zoneChangeSequence?.Kill();
 			_zoneChangeSequence = DOTween.Sequence();
 
+			_zoneChangeSequence.SetDelay(0.5f);
+			
 			_zoneChangeSequence.Append
 				(
 				 RectTransform.DOAnchorPosY(-Screen.height, 0.3f)
@@ -93,6 +95,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		public void UpdateForCurrentZone()
 		{
+			_wheel.transform.rotation = Quaternion.identity;
 			var wheelDisplayItems = SpinWheelSystemManager.Instance.DisplayingSpinWheelItems;
 			
 			for (int i = 0; i < _wheelItemIndicators.Length; i++)
