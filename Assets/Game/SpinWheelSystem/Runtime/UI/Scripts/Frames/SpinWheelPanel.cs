@@ -18,6 +18,7 @@ public class SpinWheelPanel : MonoBehaviour
 	private Coroutine _lockInteractionCoroutine;
 	private Coroutine _spinAnimationCoroutine;
 	private Sequence _openingAnimationSequence;
+	private int _inputLockCounter;
 
 	public void Initialize()
 	{
@@ -88,6 +89,7 @@ public class SpinWheelPanel : MonoBehaviour
 			}
 			else
 			{
+				ToggleInteraction(false);
 				_bombOverlayElement.Open();
 			}
 		}
@@ -101,6 +103,8 @@ public class SpinWheelPanel : MonoBehaviour
 
 	private void OnBombOverlayClosed(bool didGiveUp)
 	{
+		ToggleInteraction(true);
+		
 		if (didGiveUp)
 		{
 			SpinWheelSystemManager.Instance.DoOnSpinWheelPanelClosing(false);
@@ -145,12 +149,14 @@ public class SpinWheelPanel : MonoBehaviour
 			yield return new WaitForSeconds(time);
 			ToggleInteraction(true);
 		}
+	}
 
-		void ToggleInteraction(bool isInteractable)
-		{
-			_exitButton.interactable = isInteractable;
-			_spinButton.interactable = isInteractable;
-		}
+	void ToggleInteraction(bool isInteractable)
+	{
+		_inputLockCounter += isInteractable ? 1 : -1;
+
+		_exitButton.interactable = _inputLockCounter == 0;
+		_spinButton.interactable = _inputLockCounter == 0;
 	}
 	#endregion
 }
