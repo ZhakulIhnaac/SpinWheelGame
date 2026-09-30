@@ -1,6 +1,10 @@
 using DG.Tweening;
+using Game.InventorySystem.Runtime.Scripts;
+using Game.SpinWheelSystem.Runtime.Scripts;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 {
@@ -11,6 +15,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private Image _backgroundDarkness;
 		[SerializeField] private Image _bombIcon;
 		[SerializeField] private Image _deathShine;
+		[SerializeField] private TextMeshProUGUI _reviveCoinAmountText;
 		[SerializeField] private Button _giveUpButton;
 		[SerializeField] private Button _reviveButton;
 
@@ -18,11 +23,12 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		
 		public void Initialize()
 		{
-			_reviveButton.onClick.AddListener(OnSaveButtonClicked);
+			_reviveButton.onClick.AddListener(OnReviveButtonClicked);
 			_giveUpButton.onClick.AddListener(OnGiveUpButtonClicked);
 			gameObject.SetActive(false);
 			_backgroundDarkness.color = new Color(0f, 0f, 0f, 0f);
 			ToggleInteraction(false);
+			_reviveCoinAmountText.text = $"{SpinWheelSystemManager.RevivePrice}";
 		}
 		
 		public void Open()
@@ -103,14 +109,26 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			_toggleSequence.Play();
 		}
 
-		private void OnSaveButtonClicked()
+		private void OnReviveButtonClicked()
 		{
-			Close(false);
+			if (InventorySystemManager.Instance.TrySpendCoin(SpinWheelSystemManager.RevivePrice))
+			{
+				Close(false);
+			}
+			else
+			{
+				DoOnCannotRevive();
+			}
 		}
 
 		private void OnGiveUpButtonClicked()
 		{
 			Close(true);
+		}
+
+		private void DoOnCannotRevive()
+		{
+			Debug.Log("Opening coin IAP purchase popup");
 		}
 
 		private void ToggleInteraction(bool isEnabled)

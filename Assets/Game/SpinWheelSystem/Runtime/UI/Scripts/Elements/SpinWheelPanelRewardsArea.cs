@@ -73,6 +73,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			}
 
 			_resourceCollectParticle.Stop();
+			_resourceCollectParticle.Clear();
 			_rewardIndicators.Clear();
 		}
 	}

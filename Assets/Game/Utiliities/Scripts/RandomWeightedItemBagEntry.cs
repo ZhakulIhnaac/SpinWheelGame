@@ -1,4 +1,4 @@
-namespace Utils.Singleton
+namespace Utilities
 {
 	public struct RandomWeightedItemBagEntry<T>
 	{

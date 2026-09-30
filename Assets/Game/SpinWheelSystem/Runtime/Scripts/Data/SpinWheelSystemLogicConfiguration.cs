@@ -1,4 +1,4 @@
-using Utils.Singleton;
+using Utilities;
 
 namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 {
@@ -8,6 +8,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 		public const int SpinWheelZonesCount = 120;
 		public const int SuperZoneInterval = 30;
 		public const int SafeZoneInterval = 5;
+		public const int RevivePrice = 200;
 
 		public static readonly RandomWeighedItemBag<SpinWheelItemId> BasicItems = new(new[]
 																			 {

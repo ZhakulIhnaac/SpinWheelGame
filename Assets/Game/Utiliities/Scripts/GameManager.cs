@@ -1,9 +1,10 @@
+using Game.InventorySystem.Runtime.Scripts;
 using Game.SharedGameSystems.HapticSystem.Controllers;
 using Game.SharedGameSystems.SoundSystem.Scripts.Controllers;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using UnityEngine;
 
-namespace Utils.Singleton
+namespace Utilities
 {
 	public class GameManager : MonoBehaviour
 	{
@@ -16,6 +17,7 @@ namespace Utils.Singleton
 			HapticSystemsManager.Instance.Initialize();
 			SoundSystemManager.Instance.Initialize();
 			SpinWheelSystemManager.Instance.Initialize();
+			InventorySystemManager.Instance.Initialize();
 		}
 	}
 }

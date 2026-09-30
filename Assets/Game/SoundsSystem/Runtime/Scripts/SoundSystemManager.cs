@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.SharedGameSystems.SoundSystem.Scripts.Data;
 using UnityEngine;
-using Utils.Singleton;
+using Utilities;
 using Random = UnityEngine.Random;
 
 namespace Game.SharedGameSystems.SoundSystem.Scripts.Controllers

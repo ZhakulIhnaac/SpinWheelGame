@@ -1,5 +1,5 @@
 using Lofelt.NiceVibrations;
-using Utils.Singleton;
+using Utilities;
 
 namespace Game.SharedGameSystems.HapticSystem.Controllers
 {

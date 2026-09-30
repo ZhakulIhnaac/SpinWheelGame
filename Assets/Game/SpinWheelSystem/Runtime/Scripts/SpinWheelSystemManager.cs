@@ -5,7 +5,6 @@ using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.UI.Scripts.Elements;
 using UnityEngine;
 using Utilities;
-using Utils.Singleton;
 using Random = UnityEngine.Random;
 
 namespace Game.SpinWheelSystem.Runtime.Scripts
@@ -19,6 +18,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		public static float ZoneStepTime => SpinWheelSystemClientConfiguration.ZoneStepTime;
 		public static float WheelSpinTime => SpinWheelSystemClientConfiguration.WheelSpinTime;
 		public static float RewardGiveAnimationTime => SpinWheelSystemClientConfiguration.RewardGiveAnimationTime;
+		public static int RevivePrice => SpinWheelSystemLogicConfiguration.RevivePrice;
 
 		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
 		private readonly Dictionary<SpinWheelItemId, int> _earnedItems = new(16);

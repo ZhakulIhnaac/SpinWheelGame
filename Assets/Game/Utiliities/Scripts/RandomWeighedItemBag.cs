@@ -1,5 +1,6 @@
 using UnityEngine;
-namespace Utils.Singleton
+
+namespace Utilities
 {
 	public class RandomWeighedItemBag<T>
 	{

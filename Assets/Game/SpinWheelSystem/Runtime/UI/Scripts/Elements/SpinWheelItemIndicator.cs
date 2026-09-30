@@ -10,11 +10,20 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 	{
 		[SerializeField] private Image _icon;
 		[SerializeField] private TextMeshProUGUI _amountText;
-		
+
 		public void SetItemIdAndAmount(SpinWheelItemDto spinWheelItem)
 		{
 			_icon.sprite = SpinWheelSystemManager.Instance.GetItemSpecification(spinWheelItem.SpinWheelItemId).Icon;
-			_amountText.SetText($"{spinWheelItem.Amount}");
+
+			if (spinWheelItem.SpinWheelItemId == SpinWheelItemId.Bomb)
+			{
+				_amountText.SetText($"");
+				_icon.rectTransform.anchoredPosition = Vector2.zero;
+			}
+			else
+			{
+				_amountText.SetText($"{spinWheelItem.Amount}");
+			}
 		}
 	}
 }
