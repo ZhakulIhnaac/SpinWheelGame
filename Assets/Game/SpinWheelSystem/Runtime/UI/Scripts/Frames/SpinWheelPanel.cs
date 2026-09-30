@@ -40,6 +40,7 @@ public class SpinWheelPanel : MonoBehaviour
 		_wheelElement.ResetElement();
 		_wheelElement.UpdateForCurrentZone();
 		gameObject.SetActive(true);
+		UpdateExitButtonAvailability();
 		PlayOpeningAnimation();
 	}
 
@@ -51,7 +52,7 @@ public class SpinWheelPanel : MonoBehaviour
 		_openingAnimationSequence.Append
 			(
 			 _rewardsArea.GetOpeningAnimation()
-			 );
+			);
 
 		_openingAnimationSequence.Join
 			(
@@ -104,7 +105,7 @@ public class SpinWheelPanel : MonoBehaviour
 	private void OnBombOverlayClosed(bool didGiveUp)
 	{
 		ToggleInteraction(true);
-		
+
 		if (didGiveUp)
 		{
 			SpinWheelSystemManager.Instance.DoOnSpinWheelPanelClosing(false);
@@ -120,6 +121,7 @@ public class SpinWheelPanel : MonoBehaviour
 	{
 		if (SpinWheelSystemManager.Instance.TryToAdvanceToTheNextZone())
 		{
+			UpdateExitButtonAvailability();
 			SpinWheelSystemManager.Instance.SetNewItemsForCurrentZone();
 			_zonesArea.MoveToTheCurrentZone();
 			_wheelElement.PlayUpdateWithZoneChangeAnimation();
@@ -130,6 +132,8 @@ public class SpinWheelPanel : MonoBehaviour
 			ClosePanel();
 		}
 	}
+
+	private void UpdateExitButtonAvailability() => _exitButton.gameObject.SetActive(SpinWheelSystemManager.Instance.CurrentZoneId != SpinZoneId.Basic);
 
 	private void ClosePanel()
 	{
