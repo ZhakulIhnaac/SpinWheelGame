@@ -42,15 +42,25 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_spinSequence.Append
 				(
+					transform.DOScale(Vector3.one * 1.2f, 0.2f)
+				 );
+			
+			_spinSequence.Append
+				(
 				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, 40), 0.3f)
 					   .SetRelative(true)
 				);
 
 			_spinSequence.Append
 				(
-				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, -totalSpinAngle), SpinWheelSystemManager.WheelSpinTime - 0.3f)
+				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, -totalSpinAngle), SpinWheelSystemManager.WheelSpinTime - 0.7f)
 					   .SetRelative(true)
 					   .SetEase(Ease.OutSine)
+				);
+
+			_spinSequence.Append
+				(
+				 transform.DOScale(Vector3.one, 0.2f)
 				);
 
 			_spinSequence.Play();
