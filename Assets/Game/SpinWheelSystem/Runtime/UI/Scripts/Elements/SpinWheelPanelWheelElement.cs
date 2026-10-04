@@ -18,7 +18,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private Image _wheel;
 		[SerializeField] private SpinWheelItemIndicator[] _wheelItemIndicators;
 
-		private const float _spinWheelItemStepAngle = 360f / SpinWheelSystemLogicConfiguration.SpinWheelItemsCount;
+		private const float _spinWheelItemStepAngle = 360f / SpinWheelSystemLogicConfiguration.SpinWheelSliceCount;
 		
 		private Sequence _spinSequence;
 		private Sequence _zoneChangeSequence;
@@ -128,11 +128,11 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		public void UpdateForCurrentZone()
 		{
 			_wheel.transform.rotation = Quaternion.identity;
-			var wheelDisplayItems = SpinWheelSystemManager.Instance.DisplayingSpinWheelItems;
+			var wheelDisplaySlices = SpinWheelSystemManager.Instance.DisplayingSlices;
 			
 			for (int i = 0; i < _wheelItemIndicators.Length; i++)
 			{
-				_wheelItemIndicators[i].SetItemIdAndAmount(wheelDisplayItems[i]);
+				_wheelItemIndicators[i].SetSlice(wheelDisplaySlices[i]);
 			}
 
 			var sprites = SpinWheelSystemManager.Instance.GetCurrentZoneWheelSprites();

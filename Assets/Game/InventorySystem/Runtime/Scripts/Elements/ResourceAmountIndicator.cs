@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Game.InventorySystem.Runtime.Scripts.Data;
 using TMPro;
 using UnityEngine;
 
@@ -10,25 +11,27 @@ namespace Game.InventorySystem.Runtime.Scripts.Elements
 
 		private Tween _amountChangeAnimation;
 		private int _displayingAmount;
-		
+
 		public void Initialize()
 		{
-			InventorySystemManager.Instance.CoinAmountChanged += OnCoinAmountChanged;
-			SetAmount(InventorySystemManager.Instance.CoinAmount);
+			InventorySystemManager.Instance.ItemAmountChanged += OnItemAmountChanged;
+			SetAmount(InventorySystemManager.Instance.GetItemAmount(ItemId.Coin));
 		}
-		
-		private void OnCoinAmountChanged()
+
+		private void OnItemAmountChanged(ItemId itemId)
 		{
+			if (itemId != ItemId.Coin) return;
+
 			PlayAmountChangeAnimation();
 		}
-		
+
 		private void PlayAmountChangeAnimation()
 		{
 			var initialAmount = _displayingAmount;
-			var targetAmount = InventorySystemManager.Instance.CoinAmount;
+			var targetAmount = InventorySystemManager.Instance.GetItemAmount(ItemId.Coin);
 
 			_amountChangeAnimation?.Kill();
-			
+
 			_amountChangeAnimation = DOVirtual.Int(initialAmount, targetAmount, 0.5f, SetAmount)
 											  .SetEase(Ease.Linear);
 

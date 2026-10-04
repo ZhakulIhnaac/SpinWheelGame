@@ -1,11 +1,7 @@
-using System;
-
-namespace Game.SpinWheelSystem.Runtime.Scripts.Data
+namespace Game.InventorySystem.Runtime.Scripts.Data
 {
-	[Serializable]
-	public enum SpinWheelItemId
+	public enum ItemId
 	{
-		Bomb = 0,
 		AviatorGlassesEaster = 1,
 		BaseballCapEaster = 2,
 		Cash = 3,
@@ -39,5 +35,6 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 		SmgPoints = 33,
 		SniperPoints = 34,
 		VestPoints = 35,
+		Coin = 36,
 	}
 }

@@ -1,14 +1,12 @@
+using System;
+using UnityEngine;
+
 namespace Utilities
 {
+	[Serializable]
 	public struct RandomWeightedItemBagEntry<T>
 	{
-		public T Item { get; private set; }
-		public int Weight { get; private set; }
-		
-		public RandomWeightedItemBagEntry(T item, int weight)
-		{
-			Item = item;
-			Weight = weight;
-		}
+		[field: SerializeField] public T Item { get; private set; }
+		[field: SerializeField] public int Weight { get; private set; }
 	}
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AssetKits.ParticleImage;
 using DG.Tweening;
+using Game.InventorySystem.Runtime.Scripts.Data;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using Game.SpinWheelSystem.Runtime.Scripts.Data;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private RectTransform _rewardsListContent;
 		[SerializeField] private ParticleImage _resourceCollectParticle;
 
-		private readonly Dictionary<SpinWheelItemId, SpinWheelPanelRewardIndicator> _rewardIndicators = new(16);
+		private readonly Dictionary<ItemId, SpinWheelPanelRewardIndicator> _rewardIndicators = new(16);
 
 		private Transform _wheelElementEarnedRewardPosition;
 		private Vector2 _originalAnchoredPosition;
@@ -34,12 +35,11 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		public void PlayRewardEarnAnimation()
 		{
 			var itemEarned = SpinWheelSystemManager.Instance.LastSpinResult;
-			var indicator = _rewardIndicators.TryGetValue(itemEarned.SpinWheelItemId, out SpinWheelPanelRewardIndicator value) ? value : CreateNewRewardIndicator(itemEarned.SpinWheelItemId);
-			var itemSpecification = SpinWheelSystemManager.Instance.GetItemSpecification(itemEarned.SpinWheelItemId);
+			var indicator = _rewardIndicators.TryGetValue(itemEarned.ItemId, out SpinWheelPanelRewardIndicator value) ? value : CreateNewRewardIndicator(itemEarned.ItemId);
 			
 			_resourceCollectParticle.transform.position = _wheelElementEarnedRewardPosition.position;
 			_resourceCollectParticle.attractorTarget = indicator.AttractorTargetPosition;
-			_resourceCollectParticle.sprite = itemSpecification.Icon;
+			_resourceCollectParticle.sprite = SpinWheelSystemManager.Instance.GetItemIcon(itemEarned.ItemId);
 			_resourceCollectParticle.rateOverLifetime = Mathf.Clamp(itemEarned.Amount, 1, 5);
 			_resourceCollectParticle.onFirstParticleFinished.AddListener(DoOnFirstParticleFinished);
 			_resourceCollectParticle.onAnyParticleFinished.AddListener(DoOnAnyParticleFinished);
@@ -57,11 +57,11 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			}
 		}
 		
-		private SpinWheelPanelRewardIndicator CreateNewRewardIndicator(SpinWheelItemId itemEarnedSpinWheelItemId)
+		private SpinWheelPanelRewardIndicator CreateNewRewardIndicator(ItemId itemId)
 		{
 			var newIndicator = Instantiate(SpinWheelSystemManager.Instance.GetRewardIndicatorPrefab(), _rewardsListContent);
-			newIndicator.Initialize(itemEarnedSpinWheelItemId);
-			_rewardIndicators.Add(itemEarnedSpinWheelItemId, newIndicator);
+			newIndicator.Initialize(itemId);
+			_rewardIndicators.Add(itemId, newIndicator);
 			return newIndicator;
 		}
 

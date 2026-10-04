@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Game.InventorySystem.Runtime.Scripts;
+using Game.InventorySystem.Runtime.Scripts.Data;
 using Game.InventorySystem.Runtime.Scripts.Elements;
 using Game.SpinWheelSystem.Runtime.Scripts;
 using TMPro;
@@ -31,7 +32,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			gameObject.SetActive(false);
 			_backgroundDarkness.color = new Color(0f, 0f, 0f, 0f);
 			ToggleInteraction(false);
-			_reviveCoinAmountText.text = $"{SpinWheelSystemManager.RevivePrice}";
+			_reviveCoinAmountText.text = $"{SpinWheelSystemManager.Instance.RevivePrice}";
 		}
 		
 		public void Open()
@@ -114,7 +115,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private void OnReviveButtonClicked()
 		{
-			if (InventorySystemManager.Instance.TrySpendCoin(SpinWheelSystemManager.RevivePrice))
+			if (InventorySystemManager.Instance.TrySpendItem(ItemId.Coin, SpinWheelSystemManager.Instance.RevivePrice))
 			{
 				Close(false);
 			}

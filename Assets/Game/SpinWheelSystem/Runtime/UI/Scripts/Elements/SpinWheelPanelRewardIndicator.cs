@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Game.InventorySystem.Runtime.Scripts.Data;
 using Game.SharedGameSystems.HapticSystem.Controllers;
 using Game.SharedGameSystems.SoundSystem.Scripts.Controllers;
 using Game.SharedGameSystems.SoundSystem.Scripts.Data;
@@ -22,14 +23,14 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		private Sequence _openingSequence;
 		private Tween _amountUpdateTween;
 		private Tween _itemAddedEffectTween;
-		private SpinWheelItemId _itemId;
+		private ItemId _itemId;
 		private int _currentDisplayAmount;
 
-		public void Initialize(SpinWheelItemId itemId)
+		public void Initialize(ItemId itemId)
 		{
 			_itemId = itemId;
 			SetDisplayAmount(0);
-			_icon.sprite = SpinWheelSystemManager.Instance.GetItemSpecification(_itemId).Icon;
+			_icon.sprite = SpinWheelSystemManager.Instance.GetItemIcon(_itemId);
 			_bodyTransform.localScale = Vector3.one * 3f;
 			_bodyCanvasGroup.alpha = 0;
 			PlayOpeningAnimation();

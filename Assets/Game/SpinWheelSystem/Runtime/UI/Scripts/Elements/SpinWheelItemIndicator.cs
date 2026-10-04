@@ -11,18 +11,18 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private Image _icon;
 		[SerializeField] private TextMeshProUGUI _amountText;
 
-		public void SetItemIdAndAmount(SpinWheelItemDto spinWheelItem)
+		public void SetSlice(SpinWheelSliceData slice)
 		{
-			_icon.sprite = SpinWheelSystemManager.Instance.GetItemSpecification(spinWheelItem.SpinWheelItemId).Icon;
+			_icon.sprite = SpinWheelSystemManager.Instance.GetSliceIcon(slice);
 
-			if (spinWheelItem.SpinWheelItemId == SpinWheelItemId.Bomb)
+			if (slice.SliceType == SpinWheelSliceType.Bomb)
 			{
 				_amountText.SetText($"");
 				_icon.rectTransform.anchoredPosition = Vector2.zero;
 			}
 			else
 			{
-				_amountText.SetText($"{spinWheelItem.Amount}");
+				_amountText.SetText($"{slice.Amount}");
 			}
 		}
 	}

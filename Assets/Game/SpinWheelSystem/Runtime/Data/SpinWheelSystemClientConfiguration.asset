@@ -12,113 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2db2b50394e450aa670458ae3279872, type: 3}
   m_Name: SpinWheelSystemClientConfiguration
   m_EditorClassIdentifier: 
-  _spinWheelSystemItemSpecifications:
-  - <Id>k__BackingField: 0
-    <DisplayName>k__BackingField: Death
-    <Icon>k__BackingField: {fileID: 21300000, guid: ce7e7cc8365264ef19e84d5c1987d33d, type: 3}
-  - <Id>k__BackingField: 1
-    <DisplayName>k__BackingField: Aviator Glasses - Easter Edition
-    <Icon>k__BackingField: {fileID: 21300000, guid: 655fa7178cf6342de9a7fbb8ddbf1add, type: 3}
-  - <Id>k__BackingField: 2
-    <DisplayName>k__BackingField: Baseball Cap - Easter Edition
-    <Icon>k__BackingField: {fileID: 21300000, guid: 8b840bf2cc9044692a57fc99f77c6ad4, type: 3}
-  - <Id>k__BackingField: 3
-    <DisplayName>k__BackingField: Cash
-    <Icon>k__BackingField: {fileID: 21300000, guid: 6834a0a1787d24695b7e9e6ee2545c86, type: 3}
-  - <Id>k__BackingField: 4
-    <DisplayName>k__BackingField: Big Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: 212b6d0002ca44743bd3cb5429bdcae5, type: 3}
-  - <Id>k__BackingField: 5
-    <DisplayName>k__BackingField: Bronze Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: 68ab9f4c0e8d9460897eadf95fbf1c8f, type: 3}
-  - <Id>k__BackingField: 6
-    <DisplayName>k__BackingField: Golden Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: 61d2203c6b03d44bfbec94f10aa382d0, type: 3}
-  - <Id>k__BackingField: 7
-    <DisplayName>k__BackingField: Silver Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: 11777e2e392a44d748dc728353255137, type: 3}
-  - <Id>k__BackingField: 8
-    <DisplayName>k__BackingField: Small Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: a991cfaf8f30143fdb48f5cdbb6dd6dc, type: 3}
-  - <Id>k__BackingField: 9
-    <DisplayName>k__BackingField: Standard Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: 7df1916038f464e7fbe606f3bdc4bea7, type: 3}
-  - <Id>k__BackingField: 10
-    <DisplayName>k__BackingField: Super Chest
-    <Icon>k__BackingField: {fileID: 21300000, guid: a609e22088a264946bd8907786780a6a, type: 3}
-  - <Id>k__BackingField: 11
-    <DisplayName>k__BackingField: Gold
-    <Icon>k__BackingField: {fileID: 21300000, guid: 61d2203c6b03d44bfbec94f10aa382d0, type: 3}
-  - <Id>k__BackingField: 12
-    <DisplayName>k__BackingField: Pumpkin Helmet
-    <Icon>k__BackingField: {fileID: 21300000, guid: 0819f98822f8a43a18f606655b11b7e2, type: 3}
-  - <Id>k__BackingField: 13
-    <DisplayName>k__BackingField: Bayonet - Easter Edition
-    <Icon>k__BackingField: {fileID: 21300000, guid: 0b4e47507c868427c985f0ce96346308, type: 3}
-  - <Id>k__BackingField: 14
-    <DisplayName>k__BackingField: Bayonet - Summer Edition
-    <Icon>k__BackingField: {fileID: 21300000, guid: ba5af8c9ae064478f91558ff77a00bd2, type: 3}
-  - <Id>k__BackingField: 15
-    <DisplayName>k__BackingField: M26
-    <Icon>k__BackingField: {fileID: 21300000, guid: 0ea79425d5d7f43bea373da653578abd, type: 3}
-  - <Id>k__BackingField: 16
-    <DisplayName>k__BackingField: M67
-    <Icon>k__BackingField: {fileID: 21300000, guid: 721ff5bcf7719415e94196f87839a823, type: 3}
-  - <Id>k__BackingField: 17
-    <DisplayName>k__BackingField: Neuro Stim
-    <Icon>k__BackingField: {fileID: 21300000, guid: cce9a8dd3acdb4a37bb9b683961b2b98, type: 3}
-  - <Id>k__BackingField: 18
-    <DisplayName>k__BackingField: Regenerator
-    <Icon>k__BackingField: {fileID: 21300000, guid: 21e3b6357b0c445418faee6ec50a7fc8, type: 3}
-  - <Id>k__BackingField: 19
-    <DisplayName>k__BackingField: Itchy Burny
-    <Icon>k__BackingField: {fileID: 21300000, guid: 15dda8410797a4a218a52365733c5293, type: 3}
-  - <Id>k__BackingField: 20
-    <DisplayName>k__BackingField: Shotgun - Tier 1
-    <Icon>k__BackingField: {fileID: 21300000, guid: 6df543d646c79427c8c361321ae95b18, type: 3}
-  - <Id>k__BackingField: 21
-    <DisplayName>k__BackingField: Mle - Tier 2
-    <Icon>k__BackingField: {fileID: 21300000, guid: 02d543b92fa4e4a96aee584074928c2d, type: 3}
-  - <Id>k__BackingField: 22
-    <DisplayName>k__BackingField: Rifle - Tier 2
-    <Icon>k__BackingField: {fileID: 21300000, guid: 3a946ac6dbe814e879adf67cedfbb61c, type: 3}
-  - <Id>k__BackingField: 23
-    <DisplayName>k__BackingField: Shotgun - Tier 3
-    <Icon>k__BackingField: {fileID: 21300000, guid: d6b2fcc3d22634d4d9cb3942be91f196, type: 3}
-  - <Id>k__BackingField: 24
-    <DisplayName>k__BackingField: SMG - Tier 3
-    <Icon>k__BackingField: {fileID: 21300000, guid: 402ac35684b31493982dda5ca2898a10, type: 3}
-  - <Id>k__BackingField: 25
-    <DisplayName>k__BackingField: Sniper - Tier 3
-    <Icon>k__BackingField: {fileID: 21300000, guid: 97e9fd13ef0b24070af64385c6a72990, type: 3}
-  - <Id>k__BackingField: 26
-    <DisplayName>k__BackingField: Armor Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: 4bfece41e52c748c093d9addd347c83f, type: 3}
-  - <Id>k__BackingField: 27
-    <DisplayName>k__BackingField: Knife Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: 417ad2e483cfa45b78b92f4566c6bafa, type: 3}
-  - <Id>k__BackingField: 28
-    <DisplayName>k__BackingField: Pistol Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: ac175b466bfbb48dfae12c2550b9a3f1, type: 3}
-  - <Id>k__BackingField: 31
-    <DisplayName>k__BackingField: Rifle Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: c3fef50ece7c447fc926cf0fc2af3a61, type: 3}
-  - <Id>k__BackingField: 32
-    <DisplayName>k__BackingField: Shotgun Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: 38a21a6922b284a9a80ac409309cea39, type: 3}
-  - <Id>k__BackingField: 33
-    <DisplayName>k__BackingField: SMG Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: 4a0c83c23df3b49e1af83c23f952d01d, type: 3}
-  - <Id>k__BackingField: 34
-    <DisplayName>k__BackingField: Sniper Rifle Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: 4d8ae2d511cdd42eebcdf23007165aec, type: 3}
-  - <Id>k__BackingField: 36
-    <DisplayName>k__BackingField: Vest Points
-    <Icon>k__BackingField: {fileID: 21300000, guid: a1723d575abd747b08adac4d0d33af43, type: 3}
-  _fallbackItemSpecification:
-    <Id>k__BackingField: 0
-    <DisplayName>k__BackingField: ?????
-    <Icon>k__BackingField: {fileID: 21300000, guid: eae048264ae894df1b85a1be7a6b7b18, type: 3}
   _spinWheelSystemZoneSpecifications:
   - <Id>k__BackingField: 0
     <ZoneTextColor>k__BackingField: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
@@ -137,5 +30,6 @@ MonoBehaviour:
     <PinSprite>k__BackingField: {fileID: 21300000, guid: 1e45c2eb6ca744533ac9aa628b0923fc, type: 3}
   <ZoneIndicatorPrefab>k__BackingField: {fileID: 4722170372279194457, guid: 77ddfbbe22cd94ac7ab0c543b9f428f6, type: 3}
   <RewardIndicatorPrefab>k__BackingField: {fileID: 2925762015710183240, guid: 4cb0b5d3922594a15aeb4b669828e1b3, type: 3}
+  <BombIcon>k__BackingField: {fileID: 21300000, guid: ce7e7cc8365264ef19e84d5c1987d33d, type: 3}
   <ItemAddedSoundEffect>k__BackingField: {fileID: 8300000, guid: 25411bb66db7c4a4aba12bf13da34ae5, type: 3}
   <WheelPinTickSound>k__BackingField: {fileID: 8300000, guid: 52a27a15d50414aaa8c1a07203175a9a, type: 3}

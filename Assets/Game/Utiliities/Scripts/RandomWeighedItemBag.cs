@@ -1,38 +1,36 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Utilities
 {
+	[Serializable]
 	public class RandomWeighedItemBag<T>
 	{
-		private RandomWeightedItemBagEntry<T>[] _bagEntries;
-		
-		private int _totalWeight;
-		
-		public RandomWeighedItemBag(RandomWeightedItemBagEntry<T>[] bagEntries)
-		{
-			_bagEntries = bagEntries;
-			
-			foreach (var bagEntry in _bagEntries)
-			{
-				_totalWeight += bagEntry.Weight;
-			}
-		}
+		[SerializeField] private RandomWeightedItemBagEntry<T>[] _bagEntries;
 
 		public T TakeRandomItem()
 		{
-			var randomNumber = Random.Range(0, _totalWeight);
+			var totalWeight = 0;
+
+			for (int i = 0; i < _bagEntries.Length; i++)
+			{
+				totalWeight += _bagEntries[i].Weight;
+			}
+
+			var randomNumber = Random.Range(0, totalWeight);
 
 			for (int i = 0; i < _bagEntries.Length; i++)
 			{
 				randomNumber -= _bagEntries[i].Weight;
 
-				if (randomNumber <= 0)
+				if (randomNumber < 0)
 				{
 					return _bagEntries[i].Item;
 				}
 			}
 			
-			throw new System.Exception("Should never happen");
+			throw new Exception("Should never happen");
 		}
 	}
 }

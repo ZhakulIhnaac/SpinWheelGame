@@ -83,7 +83,7 @@ public class SpinWheelPanel : MonoBehaviour
 
 		void HandleSpinResult()
 		{
-			if (SpinWheelSystemManager.Instance.LastSpinResult.SpinWheelItemId != SpinWheelItemId.Bomb)
+			if (SpinWheelSystemManager.Instance.LastSpinResult.SliceType == SpinWheelSliceType.Item)
 			{
 				_rewardsArea.PlayRewardEarnAnimation();
 				TryToAdvanceToTheNextZone();

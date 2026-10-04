@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace Game.SpinWheelSystem.Runtime.Scripts.Data
+namespace Game.InventorySystem.Runtime.Scripts.Data
 {
 	[Serializable]
-	public struct SpinWheelSystemItemSpecification
+	public struct InventoryItemSpecification
 	{
-		[field: SerializeField] public SpinWheelItemId Id { get; private set; }
+		[field: SerializeField] public ItemId Id { get; private set; }
 		[field: SerializeField] public string DisplayName { get; private set; }
 		[field: SerializeField] public Sprite Icon { get; private set; }
 	}
