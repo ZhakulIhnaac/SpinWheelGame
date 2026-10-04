@@ -18,11 +18,14 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private Transform _wheelElementEarnedRewardPosition;
 		private Vector2 _originalAnchoredPosition;
+		private SpinWheelPanelRewardIndicator _collectTargetIndicator;
 		
 		public void Initialize(Transform wheelElementEarnedRewardPosition)
 		{
 			_wheelElementEarnedRewardPosition = wheelElementEarnedRewardPosition;
 			_originalAnchoredPosition = RectTransform.anchoredPosition;
+			_resourceCollectParticle.onFirstParticleFinished.AddListener(OnFirstParticleFinished);
+			_resourceCollectParticle.onAnyParticleFinished.AddListener(OnAnyParticleFinished);
 		}
 
 		public Tween GetOpeningAnimation()
@@ -35,27 +38,19 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		public void PlayRewardEarnAnimation()
 		{
 			var itemEarned = SpinWheelSystemManager.Instance.LastSpinResult;
-			var indicator = _rewardIndicators.TryGetValue(itemEarned.ItemId, out SpinWheelPanelRewardIndicator value) ? value : CreateNewRewardIndicator(itemEarned.ItemId);
+			_collectTargetIndicator = _rewardIndicators.TryGetValue(itemEarned.ItemId, out SpinWheelPanelRewardIndicator value) ? value : CreateNewRewardIndicator(itemEarned.ItemId);
 			
 			_resourceCollectParticle.transform.position = _wheelElementEarnedRewardPosition.position;
-			_resourceCollectParticle.attractorTarget = indicator.AttractorTargetPosition;
+			_resourceCollectParticle.attractorTarget = _collectTargetIndicator.AttractorTargetPosition;
 			_resourceCollectParticle.sprite = SpinWheelSystemManager.Instance.GetItemIcon(itemEarned.ItemId);
 			_resourceCollectParticle.rateOverLifetime = Mathf.Clamp(itemEarned.Amount, 1, 5);
-			_resourceCollectParticle.onFirstParticleFinished.AddListener(DoOnFirstParticleFinished);
-			_resourceCollectParticle.onAnyParticleFinished.AddListener(DoOnAnyParticleFinished);
 
 			_resourceCollectParticle.Play();
-
-			void DoOnFirstParticleFinished()
-			{
-				indicator.PlayAmountUpdateAnimation();
-			}
-
-			void DoOnAnyParticleFinished()
-			{
-				indicator.PlayItemAddedEffect();
-			}
 		}
+
+		private void OnFirstParticleFinished() => _collectTargetIndicator.PlayAmountUpdateAnimation();
+
+		private void OnAnyParticleFinished() => _collectTargetIndicator.PlayItemAddedEffect();
 		
 		private SpinWheelPanelRewardIndicator CreateNewRewardIndicator(ItemId itemId)
 		{
@@ -75,6 +70,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			_resourceCollectParticle.Stop();
 			_resourceCollectParticle.Clear();
 			_rewardIndicators.Clear();
+			_collectTargetIndicator = null;
 		}
 	}
 }
