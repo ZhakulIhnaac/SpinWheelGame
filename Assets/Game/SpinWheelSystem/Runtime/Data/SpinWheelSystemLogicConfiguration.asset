@@ -16,92 +16,237 @@ MonoBehaviour:
   <SuperZoneInterval>k__BackingField: 30
   <SafeZoneInterval>k__BackingField: 5
   <RevivePrice>k__BackingField: 200
-  <BasicItems>k__BackingField:
-    _bagEntries:
-    - <Item>k__BackingField: 1
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 2
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 3
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 4
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 5
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 7
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 8
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 9
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 11
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 13
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 14
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 15
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 16
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 17
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 18
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 19
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 26
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 27
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 28
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 31
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 32
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 33
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 34
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 35
-      <Weight>k__BackingField: 1
-  <SuperItems>k__BackingField:
-    _bagEntries:
-    - <Item>k__BackingField: 6
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 10
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 12
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 20
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 21
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 22
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 23
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 24
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 25
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 26
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 27
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 28
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 31
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 32
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 33
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 34
-      <Weight>k__BackingField: 1
-    - <Item>k__BackingField: 35
-      <Weight>k__BackingField: 1
+  <BasicZoneRewards>k__BackingField:
+    <TierItemPools>k__BackingField:
+    - _bagEntries:
+      - <Item>k__BackingField: 26
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 27
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 28
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 31
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 32
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 33
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 34
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 35
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 3
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 11
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 8
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 9
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 19
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 15
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 16
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 17
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 18
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 5
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 7
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 4
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 1
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 2
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 13
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 14
+        <Weight>k__BackingField: 1
+    <TierCheckpoints>k__BackingField:
+    - <ZoneNumber>k__BackingField: 1
+      <TierWeights>k__BackingField:
+      - 100
+      - 0
+      - 0
+      - 0
+      - 0
+    - <ZoneNumber>k__BackingField: 30
+      <TierWeights>k__BackingField:
+      - 50
+      - 30
+      - 15
+      - 5
+      - 0
+    - <ZoneNumber>k__BackingField: 60
+      <TierWeights>k__BackingField:
+      - 25
+      - 30
+      - 25
+      - 15
+      - 5
+    - <ZoneNumber>k__BackingField: 120
+      <TierWeights>k__BackingField:
+      - 10
+      - 20
+      - 30
+      - 25
+      - 15
+  <SafeZoneRewards>k__BackingField:
+    <TierItemPools>k__BackingField:
+    - _bagEntries:
+      - <Item>k__BackingField: 26
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 27
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 28
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 31
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 32
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 33
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 34
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 35
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 3
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 11
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 8
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 9
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 19
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 15
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 16
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 17
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 18
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 5
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 7
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 4
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 1
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 2
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 13
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 14
+        <Weight>k__BackingField: 1
+    <TierCheckpoints>k__BackingField:
+    - <ZoneNumber>k__BackingField: 5
+      <TierWeights>k__BackingField:
+      - 100
+      - 0
+      - 0
+      - 0
+      - 0
+    - <ZoneNumber>k__BackingField: 30
+      <TierWeights>k__BackingField:
+      - 40
+      - 30
+      - 20
+      - 10
+      - 0
+    - <ZoneNumber>k__BackingField: 60
+      <TierWeights>k__BackingField:
+      - 20
+      - 25
+      - 30
+      - 15
+      - 10
+    - <ZoneNumber>k__BackingField: 120
+      <TierWeights>k__BackingField:
+      - 5
+      - 15
+      - 30
+      - 30
+      - 20
+  <SuperZoneRewards>k__BackingField:
+    <TierItemPools>k__BackingField:
+    - _bagEntries:
+      - <Item>k__BackingField: 26
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 27
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 28
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 31
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 32
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 33
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 34
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 35
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 6
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 10
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 12
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 20
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 21
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 22
+        <Weight>k__BackingField: 1
+    - _bagEntries:
+      - <Item>k__BackingField: 23
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 24
+        <Weight>k__BackingField: 1
+      - <Item>k__BackingField: 25
+        <Weight>k__BackingField: 1
+    <TierCheckpoints>k__BackingField:
+    - <ZoneNumber>k__BackingField: 30
+      <TierWeights>k__BackingField:
+      - 40
+      - 30
+      - 20
+      - 10
+      - 0
+    - <ZoneNumber>k__BackingField: 60
+      <TierWeights>k__BackingField:
+      - 20
+      - 25
+      - 25
+      - 20
+      - 10
+    - <ZoneNumber>k__BackingField: 120
+      <TierWeights>k__BackingField:
+      - 0
+      - 10
+      - 25
+      - 35
+      - 30
   <BasicItemAmounts>k__BackingField:
     _bagEntries:
     - <Item>k__BackingField: 5
@@ -130,3 +275,5 @@ MonoBehaviour:
       <Weight>k__BackingField: 1
     - <Item>k__BackingField: 500
       <Weight>k__BackingField: 1
+  <AmountMultiplierStepPerZone>k__BackingField: 0.02
+  <MaxAmountMultiplier>k__BackingField: 3

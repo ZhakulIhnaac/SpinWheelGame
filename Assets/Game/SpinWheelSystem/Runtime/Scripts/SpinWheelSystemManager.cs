@@ -67,25 +67,31 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 				_displayingSlices[arrayIterationIndex++] = SpinWheelSliceData.CreateBomb();
 			}
 
-			var itemsList = spinZoneId switch
-							{
-								SpinZoneId.Basic => _spinWheelSystemLogicConfiguration.BasicItems,
-								SpinZoneId.Safe  => _spinWheelSystemLogicConfiguration.BasicItems,
-								SpinZoneId.Super => _spinWheelSystemLogicConfiguration.SuperItems,
-								_                => _spinWheelSystemLogicConfiguration.BasicItems
-							};
+			var zoneRewards = spinZoneId switch
+							  {
+								  SpinZoneId.Basic => _spinWheelSystemLogicConfiguration.BasicZoneRewards,
+								  SpinZoneId.Safe  => _spinWheelSystemLogicConfiguration.SafeZoneRewards,
+								  SpinZoneId.Super => _spinWheelSystemLogicConfiguration.SuperZoneRewards,
+								  _                => throw new ArgumentOutOfRangeException(nameof(spinZoneId), spinZoneId, null)
+							  };
 
 			var itemAmountList = spinZoneId switch
 								{
 									SpinZoneId.Basic => _spinWheelSystemLogicConfiguration.BasicItemAmounts,
 									SpinZoneId.Safe  => _spinWheelSystemLogicConfiguration.BasicItemAmounts,
 									SpinZoneId.Super => _spinWheelSystemLogicConfiguration.SuperItemAmounts,
-									_                => _spinWheelSystemLogicConfiguration.BasicItemAmounts
+									_                => throw new ArgumentOutOfRangeException(nameof(spinZoneId), spinZoneId, null)
 								};
+
+			var tierWeights = zoneRewards.GetTierWeightsForZone(_currentZoneNumber);
+			var amountMultiplier = GetAmountMultiplierForZone(_currentZoneNumber);
 
 			for (int i = arrayIterationIndex; i < SpinWheelSystemLogicConfiguration.SpinWheelSliceCount; i++)
 			{
-				_displayingSlices[i] = SpinWheelSliceData.CreateItem(itemsList.TakeRandomItem(), itemAmountList.TakeRandomItem());
+				var tier = tierWeights.GetWeightedRandomIndex();
+				var itemId = zoneRewards.TierItemPools[tier].TakeRandomItem();
+				var amount = Mathf.Max(1, Mathf.RoundToInt(itemAmountList.TakeRandomItem() * amountMultiplier));
+				_displayingSlices[i] = SpinWheelSliceData.CreateItem(itemId, amount);
 			}
 
 			_displayingSlices.Shuffle();
@@ -152,6 +158,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 			if (zoneNumber % _spinWheelSystemLogicConfiguration.SafeZoneInterval == 0) return SpinZoneId.Safe;
 			return SpinZoneId.Basic;
 		}
+		public float GetAmountMultiplierForZone(int zoneNumber) => Mathf.Min(1f + _spinWheelSystemLogicConfiguration.AmountMultiplierStepPerZone * (zoneNumber - 1), _spinWheelSystemLogicConfiguration.MaxAmountMultiplier);
 		public int GetAmountOfEarnedItem(ItemId itemId) => _earnedItems.GetValueOrDefault(itemId, 0);
 		public Tuple<Sprite, Sprite> GetCurrentZoneWheelSprites()
 		{

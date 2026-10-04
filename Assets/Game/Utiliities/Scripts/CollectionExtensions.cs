@@ -18,6 +18,31 @@ namespace Utilities
             return collection.Count > 0 ? collection[collection.GetRandomIndex()] : default;
         }
         
+        public static int GetWeightedRandomIndex(this IReadOnlyList<float> weights)
+        {
+            var totalWeight = 0f;
+
+            for (int i = 0; i < weights.Count; i++)
+            {
+                totalWeight += weights[i];
+            }
+
+            var randomValue = (float)_random.NextDouble() * totalWeight;
+            var cumulativeWeight = 0f;
+
+            for (int i = 0; i < weights.Count; i++)
+            {
+                cumulativeWeight += weights[i];
+
+                if (randomValue < cumulativeWeight)
+                {
+                    return i;
+                }
+            }
+
+            throw new System.InvalidOperationException("Weights must contain at least one positive value");
+        }
+
         public static void Shuffle<T>(this IList<T> collection)
         {
             int n = collection.Count();  
