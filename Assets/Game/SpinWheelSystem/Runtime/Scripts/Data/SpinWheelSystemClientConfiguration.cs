@@ -10,7 +10,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts.Data
 		[SerializeField] private SpinWheelSystemZoneSpecification[] _spinWheelSystemZoneSpecifications;
 		
 		public const float ZoneStepTime = 1f;
-		public const float WheelSpinTime = 3f;
+		public const float WheelSpinTime = 5f;
 		public const float RewardGiveAnimationTime = 1.5f;
 
 		#region Prefabs

@@ -19,12 +19,14 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private SpinWheelItemIndicator[] _wheelItemIndicators;
 
 		private const float _spinWheelItemStepAngle = 360f / SpinWheelSystemLogicConfiguration.SpinWheelSliceCount;
+		private const float _pinMaxRotation = 15f;
+		private const float _pinPushStartRatio = 0.6f;
 		
 		private Sequence _spinSequence;
 		private Sequence _zoneChangeSequence;
 		private Vector2 _originalAnchoredPosition;
-		private float _targetPinRotation;
 		private float _pinEffectCountdownTime;
+		private int _lastPassedPegIndex;
 
 		public void Initialize()
 		{
@@ -45,18 +47,23 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private void HandlePinEffect()
 		{
-			var previousPinRotation = _pin.rectTransform.localEulerAngles.z;
-			var newPinRotation = Mathf.Lerp(previousPinRotation, _targetPinRotation, Time.deltaTime * 80f);
-			_pin.rectTransform.localRotation = Quaternion.Euler(0, 0, newPinRotation);
+			var angleSinceFirstPeg = Mathf.Repeat(-_wheel.rectTransform.localEulerAngles.z - _spinWheelItemStepAngle * 0.5f, 360f);
+			var pegIndex = Mathf.FloorToInt(angleSinceFirstPeg / _spinWheelItemStepAngle);
+			var progressToNextPeg = angleSinceFirstPeg / _spinWheelItemStepAngle - pegIndex;
+			var pushRatio = Mathf.Clamp01((progressToNextPeg - _pinPushStartRatio) / (1f - _pinPushStartRatio));
+			_pin.rectTransform.localRotation = Quaternion.Euler(0f, 0f, pushRatio * _pinMaxRotation);
 
 			_pinEffectCountdownTime = Mathf.Max(-0.5f, _pinEffectCountdownTime - Time.deltaTime);
 
-			if (_pinEffectCountdownTime < 0f && previousPinRotation < newPinRotation)
-			{
-				_pinEffectCountdownTime = 0.05f;
-				SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.WheelPinTickSound);
-				HapticSystemsManager.Instance.PlayLightHaptic();
-			}
+			if (pegIndex == _lastPassedPegIndex) return;
+
+			_lastPassedPegIndex = pegIndex;
+
+			if (!_spinSequence.IsActive() || _pinEffectCountdownTime >= 0f) return;
+
+			_pinEffectCountdownTime = 0.05f;
+			SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.WheelPinTickSound);
+			HapticSystemsManager.Instance.PlayLightHaptic();
 		}
 
 		public Tween GetOpeningAnimation()
@@ -68,7 +75,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		public void SpinWheelToTheItem(int itemNumber)
 		{
-			var totalSpinAngle = 20 + 360f * 8f + (360f - (itemNumber - 1) * _spinWheelItemStepAngle);
+			var totalSpinAngle = 20 + 360f * 10f + (360f - (itemNumber - 1) * _spinWheelItemStepAngle);
 
 			_spinSequence?.Kill();
 			_spinSequence = DOTween.Sequence();
@@ -88,21 +95,13 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 				(
 				 _wheel.rectTransform.DOLocalRotate(new Vector3(0, 0, -totalSpinAngle), SpinWheelSystemManager.WheelSpinTime - 0.7f)
 					   .SetRelative(true)
-					   .SetEase(Ease.OutSine)
-				);
-
-			_spinSequence.Join
-				(
-				 DOVirtual.Float(0f, totalSpinAngle / 12f, SpinWheelSystemManager.WheelSpinTime - 0.7f, UpdatePinTargetRotation)
-					   .SetEase(Ease.OutSine)
+					   .SetEase(Ease.OutQuart)
 				);
 
 			_spinSequence.Append
 				(
 				 transform.DOScale(Vector3.one, 0.2f)
 				);
-			
-			_spinSequence.OnComplete(() => UpdatePinTargetRotation(0f));
 
 			_spinSequence.Play();
 		}
@@ -151,11 +150,6 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		{
 			_pin.rectTransform.localRotation = Quaternion.identity;
 			_wheel.rectTransform.localRotation = Quaternion.identity;
-		}
-
-		private void UpdatePinTargetRotation(float value)
-		{
-			_targetPinRotation = value % 15f;
 		}
 
 		private void OnDestroy()
