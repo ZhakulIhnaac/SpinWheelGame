@@ -11,6 +11,13 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		[SerializeField] private Image _icon;
 		[SerializeField] private TextMeshProUGUI _amountText;
 
+		private Vector2 _iconDefaultAnchoredPosition;
+
+		public void Initialize()
+		{
+			_iconDefaultAnchoredPosition = _icon.rectTransform.anchoredPosition;
+		}
+
 		public void SetSlice(SpinWheelSliceData slice)
 		{
 			_icon.sprite = SpinWheelSystemManager.Instance.GetSliceIcon(slice);
@@ -23,6 +30,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 			else
 			{
 				_amountText.SetText($"{slice.Amount}");
+				_icon.rectTransform.anchoredPosition = _iconDefaultAnchoredPosition;
 			}
 		}
 	}
