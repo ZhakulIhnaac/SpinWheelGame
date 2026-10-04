@@ -23,7 +23,7 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		private readonly SpinWheelItemDto[] _displayingSpinWheelItems = new SpinWheelItemDto[SpinWheelSystemLogicConfiguration.SpinWheelItemsCount];
 		private readonly Dictionary<SpinWheelItemId, int> _earnedItems = new(16);
 
-		public SpinWheelItemDto LastItemEarned { get; private set; }
+		public SpinWheelItemDto LastSpinResult { get; private set; }
 		public SpinWheelItemDto[] DisplayingSpinWheelItems => _displayingSpinWheelItems;
 		public AudioClip ItemAddedSoundEffect => _spinWheelSystemClientConfiguration.ItemAddedSoundEffect;
 		public AudioClip WheelPinTickSound => _spinWheelSystemClientConfiguration.WheelPinTickSound;
@@ -93,10 +93,11 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		public int GetRewardNumberForSpinningTheWheel()
 		{
 			var index = Random.Range(0, SpinWheelSystemLogicConfiguration.SpinWheelItemsCount);
+			LastSpinResult = _displayingSpinWheelItems[index];
 
-			if (_displayingSpinWheelItems[index].SpinWheelItemId != SpinWheelItemId.Bomb)
+			if (LastSpinResult.SpinWheelItemId != SpinWheelItemId.Bomb)
 			{
-				AddToEarnedItems(_displayingSpinWheelItems[index]);
+				AddToEarnedItems(LastSpinResult);
 			}
 
 			return index + 1;
@@ -135,7 +136,6 @@ namespace Game.SpinWheelSystem.Runtime.Scripts
 		{
 			_earnedItems.TryAdd(itemDto.SpinWheelItemId, 0);
 			_earnedItems[itemDto.SpinWheelItemId] += itemDto.Amount;
-			LastItemEarned = itemDto;
 		}
 		#endregion
 

@@ -33,7 +33,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		public void PlayRewardEarnAnimation()
 		{
-			var itemEarned = SpinWheelSystemManager.Instance.LastItemEarned;
+			var itemEarned = SpinWheelSystemManager.Instance.LastSpinResult;
 			var indicator = _rewardIndicators.TryGetValue(itemEarned.SpinWheelItemId, out SpinWheelPanelRewardIndicator value) ? value : CreateNewRewardIndicator(itemEarned.SpinWheelItemId);
 			var itemSpecification = SpinWheelSystemManager.Instance.GetItemSpecification(itemEarned.SpinWheelItemId);
 			
