@@ -136,6 +136,7 @@ public class SpinWheelPanel : MonoBehaviour
 		_rewardsArea.ResetElement();
 		_zonesArea.ResetElement();
 		_wheelElement.ResetElement();
+		ResetInteractionLock();
 		gameObject.SetActive(false);
 	}
 
@@ -157,7 +158,18 @@ public class SpinWheelPanel : MonoBehaviour
 	void ToggleInteraction(bool isInteractable)
 	{
 		_inputLockCounter += isInteractable ? 1 : -1;
+		ApplyInteractionLock();
+	}
 
+	// Deactivating the panel stops pending unlock coroutines, so the counter must be reset explicitly.
+	private void ResetInteractionLock()
+	{
+		_inputLockCounter = 0;
+		ApplyInteractionLock();
+	}
+
+	private void ApplyInteractionLock()
+	{
 		_exitButton.interactable = _inputLockCounter == 0;
 		_spinButton.interactable = _inputLockCounter == 0;
 	}

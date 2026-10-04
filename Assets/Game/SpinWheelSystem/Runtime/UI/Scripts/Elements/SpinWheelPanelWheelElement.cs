@@ -29,6 +29,12 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 		public void Initialize()
 		{
 			_originalAnchoredPosition = RectTransform.anchoredPosition;
+
+			foreach (var wheelItemIndicator in _wheelItemIndicators)
+			{
+				wheelItemIndicator.Initialize();
+			}
+
 			ResetElement();
 		}
 
@@ -39,12 +45,13 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 		private void HandlePinEffect()
 		{
-			var currentLocalRotationOnZAxis = _pin.rectTransform.localRotation.z;
-			_pin.rectTransform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(_pin.rectTransform.localRotation.z, _targetPinRotation, Time.deltaTime * 80f));
+			var previousPinRotation = _pin.rectTransform.localEulerAngles.z;
+			var newPinRotation = Mathf.Lerp(previousPinRotation, _targetPinRotation, Time.deltaTime * 80f);
+			_pin.rectTransform.localRotation = Quaternion.Euler(0, 0, newPinRotation);
 
 			_pinEffectCountdownTime = Mathf.Max(-0.5f, _pinEffectCountdownTime - Time.deltaTime);
 
-			if (_pinEffectCountdownTime < 0f && currentLocalRotationOnZAxis < _pin.rectTransform.localRotation.z)
+			if (_pinEffectCountdownTime < 0f && previousPinRotation < newPinRotation)
 			{
 				_pinEffectCountdownTime = 0.05f;
 				SoundSystemManager.Instance.PlaySoundEffectOnce(SpinWheelSystemManager.Instance.WheelPinTickSound);
@@ -118,7 +125,7 @@ namespace Game.SpinWheelSystem.Runtime.UI.Scripts.Elements
 
 			_zoneChangeSequence.Append
 				(
-				 RectTransform.DOAnchorPosY(0, 0.3f)
+				 RectTransform.DOAnchorPosY(_originalAnchoredPosition.y, 0.3f)
 								  .SetEase(Ease.InSine)
 				);
 

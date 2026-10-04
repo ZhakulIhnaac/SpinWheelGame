@@ -11,7 +11,7 @@ namespace Game.SharedGameSystems.SoundSystem.Scripts.Controllers
 	{
 		private float RandomizedPitchValue => 1f + Random.Range(-0.2f, 0.2f);
 
-		private const int _oneShotAudioSourcePoolCount = 16;
+		private const int _oneShotAudioSourcePoolCount = 4;
 
 		private readonly Dictionary<string, (float, Coroutine)> _higherPitchValueCountdowns = new();
 
@@ -79,8 +79,7 @@ namespace Game.SharedGameSystems.SoundSystem.Scripts.Controllers
 
 		private AudioSource GetNextSoundEffectAudioSource()
 		{
-			_currentAudioSourceIndex++;
-			_currentAudioSourceIndex = _currentAudioSourceIndex == _oneShotSoundEffectAudioSources.Length - 1 ? 0 : _currentAudioSourceIndex;
+			_currentAudioSourceIndex = (_currentAudioSourceIndex + 1) % _oneShotSoundEffectAudioSources.Length;
 			return _oneShotSoundEffectAudioSources[_currentAudioSourceIndex];
 		}
 		#endregion
